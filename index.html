@@ -6,13 +6,13 @@
     <title>RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory</title>
     <meta
       name="description"
-      content="RHM-Agent equips vision-language agents with a three-tier memory and trains them with reinforcement learning to write, compress, and retrieve it."
+      content="RHM-Agent organizes long-form video evidence into a reinforced hierarchical memory, with the new HMBench-2K egocentric benchmark and two diagnostic metrics."
     />
     <meta name="color-scheme" content="light dark" />
     <meta property="og:title" content="RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory" />
     <meta
       property="og:description"
-      content="A reinforcement-learned hierarchical memory for vision-language agents."
+      content="Reinforced hierarchical memory for long-form video understanding, plus the HMBench-2K benchmark and frame-brevity / node-precision metrics."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
@@ -126,17 +126,28 @@
           <div class="abstract">
             <h2>Abstract</h2>
             <p>
-              Vision-language models excel at grounded perception, yet they treat every episode as
-              independent: context is flattened into a lossy transcript and nothing learned in one
-              task makes the next one easier. We introduce <strong>RHM-Agent</strong>, a framework
-              that gives a VLM agent an explicit three-tier memory — working, episodic, and semantic
-              — and trains it with reinforcement learning to decide what to write, what to compress,
-              and what to retrieve. A hierarchical reward couples task success with memory
-              efficiency, so the agent learns compact, transferable representations instead of
-              replaying raw history. Across long-horizon visual navigation, GUI manipulation, and
-              multi-page document QA, RHM-Agent raises task success while using a fraction of the
-              context tokens, and the memory it writes transfers to unseen tasks without additional
-              fine-tuning.
+              Long-form video understanding remains challenging for vision-language models (VLMs) due
+              to the cost of processing extensive frame sequences and the limited ability of flat or
+              heuristic memory structures to support efficient retrieval and long-horizon reasoning.
+              To address these challenges, we introduce Reinforced Hierarchical Memory Agent
+              (<strong>RHM-Agent</strong>), which organizes visual evidence into hierarchical memory to
+              selectively retrieve relevant cues and construct explainable, intelligent, and non-linear
+              reasoning paths. Equipped with dynamic memory, the RHM-Agent is optimized via a
+              hierarchical reward mechanism to balance local details with global context, enabling it
+              to navigate long videos in a human-like manner. To evaluate long-horizon temporal
+              reasoning and memory efficiency beyond standard accuracy, we propose
+              <strong>HMBench-2K</strong>, a long-form egocentric video benchmark spanning four domains:
+              medical, industrial, marine, and autonomous driving. Additionally, we introduce two
+              complementary diagnostic metrics, <em>frame brevity</em> and <em>node precision</em>, to
+              assess evidence efficiency and temporal precision, respectively. Extensive experiments
+              show that our RHM-Agent surpasses baselines with 4× the parameters or 2× the frames by up
+              to 6.63% on LVBench and 5.60% on Ego4D, proving strategic memory optimization yields
+              greater improvements than the brute-force scaling of model size or frame count. Evaluated
+              directly on our proposed HMBench-2K, RHM-Agent outperforms SOTA VLMs and long-video
+              agents by 2.00% and 7.15%, respectively, demonstrating effective long-form egocentric
+              video understanding. Further analysis shows that our method not only improves accuracy in
+              a model-agnostic design but also achieves better temporal alignment than current dynamic
+              memory-augmented agents.
             </p>
           </div>
         </div>
