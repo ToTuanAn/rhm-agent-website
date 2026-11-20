@@ -2,11 +2,9 @@ export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "rhm-theme";
 
-/** Reads the theme the user last picked, falling back to the OS preference. */
+/** The site is dark blue by default; light is an explicit opt-in. */
 export function initialTheme(): Theme {
-  const stored = safeRead();
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return safeRead() === "light" ? "light" : "dark";
 }
 
 function safeRead(): string | null {

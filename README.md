@@ -33,20 +33,21 @@ npm run preview    # serve dist/ locally
 domain. If you need to reproduce the `https://<user>.github.io/<repo>/` path locally, build with
 `VITE_BASE=/rhm-agent-website/`.
 
-## Replacing the placeholders
-
-Everything below is currently filler and should be swapped for the real material.
+## Content and assets
 
 | What | Where | Notes |
 | --- | --- | --- |
-| Paper PDF | `public/paper.pdf` | Linked from the header "Paper" button and the hero. |
-| Video | `index.html` → `.video-frame` | Set `data-video-embed="https://www.youtube.com/embed/<ID>"` for an embed, or a direct `.mp4` / `.webm` / `.ogg` URL. Remove the attribute to show the "video coming soon" hint. |
-| Figures | `public/figures/teaser.svg`, `method.svg`, `results.svg`, `video-poster.svg` | Drop in `.png`/`.svg` files and update the `src` in `index.html` (they go through `%BASE_URL%`). Keep the `alt` text accurate. |
-| Results table | `index.html` → `#results` table | Values are placeholders; the caption says so — update both. |
+| Brand mark | `public/logo.png` | Used for the header logo and the favicon. |
+| Hero footage | `data/intro.mp4` | Imported through `src/media.ts` so Vite hashes it; it fades out on scroll (`src/hero-video.ts`). |
+| Video section | `data/summary.mp4` | Imported through `src/media.ts` (`summaryUrl`). The poster is `public/figures/video-poster.svg`. The player is click-to-load: set `data-video-embed` to a YouTube URL for an embed, or a direct `.mp4` / `.webm` / `.ogg` URL. Leave it empty to fall back to `summary.mp4`. |
+| Paper figures | `public/figures/teaser.png`, `method.png`, `reward.png` | Rendered from `data/*.pdf` with `pdftoppm -png -r 200 -singlefile data/teaser.pdf public/figures/teaser`. |
+| Results tables | `index.html` → `#results` | Two tables: long-form/egocentric VideoQA and HMBench-2K per domain. |
 | Demo trace | `src/demo.ts` | The `STEPS` array drives the animated trace. |
 | Citation | `index.html` → `#bibtex` | BibTeX shown by the "Copy" button. |
-| Code link | `index.html` → hero actions | Commented out for blind review — uncomment once the repo is public. |
 | Authors / affiliation | `index.html` → `.hero-authors` | Currently "Anonymous authors". |
+
+The site opens in dark blue by default; `src/theme.ts` only switches to light when the visitor has
+explicitly chosen it, stored under the `rhm-theme` key.
 
 ## Deployment to GitHub Pages
 

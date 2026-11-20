@@ -17,18 +17,17 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rhm-agent.site/" />
     <link rel="canonical" href="https://rhm-agent.site/" />
-    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="%BASE_URL%logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="%BASE_URL%logo.png" />
     <script>
       // Apply the saved theme before first paint so the page never flashes.
+      // The site is dark blue by default; light is opt-in via the header toggle.
       (() => {
         try {
-          const saved = localStorage.getItem("rhm-theme");
-          const dark =
-            saved === "dark" ||
-            (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
-          document.documentElement.dataset.theme = dark ? "dark" : "light";
+          document.documentElement.dataset.theme =
+            localStorage.getItem("rhm-theme") === "light" ? "light" : "dark";
         } catch {
-          /* storage blocked: fall back to the default theme */
+          document.documentElement.dataset.theme = "dark";
         }
       })();
     </script>
@@ -40,13 +39,20 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a class="brand" href="#top">
-          <span class="brand-mark" aria-hidden="true"></span>
+          <img
+            class="brand-mark"
+            src="%BASE_URL%logo.png"
+            alt=""
+            width="30"
+            height="30"
+            decoding="async"
+          />
           RHM-Agent
         </a>
 
         <nav class="nav" aria-label="Section navigation">
-          <a href="#video">Video</a>
-          <a href="#teaser">Overview</a>
+          <a href="#video">Overview</a>
+          <a href="#teaser">Background</a>
           <a href="#method">Method</a>
           <a href="#results">Results</a>
           <a href="#demo">Demo</a>
@@ -54,7 +60,6 @@
         </nav>
 
         <div class="header-actions">
-          <a class="btn btn-small btn-primary" href="%BASE_URL%paper.pdf">Paper</a>
           <button
             class="icon-btn"
             id="theme-toggle"
@@ -79,6 +84,7 @@
 
     <main id="main">
       <section class="hero" id="top">
+        <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true"></div>
         <div class="wrap hero-inner">
           <p class="eyebrow">Preprint · Under review</p>
           <h1>
@@ -90,7 +96,7 @@
 
           <ul class="hero-actions">
             <li>
-              <a class="btn btn-primary" href="%BASE_URL%paper.pdf">
+              <span class="btn is-soon" aria-disabled="true">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path
                     d="M7 3h7l5 5v13H7z M14 3v5h5"
@@ -100,35 +106,58 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                Paper (PDF)
-              </a>
+                Paper <em class="soon">Coming soon</em>
+              </span>
             </li>
             <li>
-              <a class="btn" href="#video">
+              <a class="btn btn-primary" href="#video">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
                 </svg>
-                5-min video
+                Watch the summary
               </a>
             </li>
-            <!-- Remove this link before submitting for blind review. -->
             <li>
-              <a class="btn" href="https://github.com/ToTuanAn/rhm-agent-website">
+              <span class="btn is-soon" aria-disabled="true">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path
-                    d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"
-                    fill="currentColor"
+                    d="M9.5 8 5.5 12l4 4M14.5 8l4 4-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
-                Code
-              </a>
+                Code <em class="soon">Coming soon</em>
+              </span>
+            </li>
+            <li>
+              <span class="btn is-soon" aria-disabled="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M12 3.6a8.4 8.4 0 1 0 0 16.8 8.4 8.4 0 0 0 0-16.8Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M8.9 10.4h.01M15.1 10.4h.01M8.8 13.9c.9 1.2 2 1.8 3.2 1.8s2.3-.6 3.2-1.8"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Hugging Face <em class="soon">Coming soon</em>
+              </span>
             </li>
           </ul>
 
           <div class="abstract">
             <h2>Abstract</h2>
             <p>
-              Long-form video understanding remains challenging for vision-language models (VLMs) due
+              Long-form video understanding remains challenging for VLMs due
               to the cost of processing extensive frame sequences and the limited ability of flat or
               heuristic memory structures to support efficient retrieval and long-horizon reasoning.
               To address these challenges, we introduce Reinforced Hierarchical Memory Agent
@@ -159,10 +188,10 @@
         <div class="wrap">
           <header class="section-head">
             <p class="kicker">Overview</p>
-            <h2>Five-minute walkthrough</h2>
+            <h2>Paper summary</h2>
             <p class="lede">
-              The memory loop end to end: what the agent observes, how it decides to consolidate,
-              and how the reward shapes what survives.
+              How RHM-Agent grows a hierarchical memory tree, how a reinforced policy learns to
+              expand, exploit, or answer inside it. Moreover, the HMBench-2K long video question-answering benchmark is introduced to rigorously evaluate long-horizon memory agents.
             </p>
           </header>
 
@@ -175,7 +204,7 @@
             />
             <button class="video-play" id="video-play" type="button">
               <span class="video-play-icon" aria-hidden="true"></span>
-              <span class="video-play-label">Play the 5-minute overview</span>
+              <span class="video-play-label">Play the paper summary</span>
             </button>
             <p class="video-hint" id="video-hint" role="status" hidden>
               No video linked yet — set <code>data-video-embed</code> on the video frame in
@@ -188,30 +217,28 @@
       <section class="section" id="teaser">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Teaser</p>
-            <h2>One policy, three timescales of memory</h2>
+            <p class="kicker">Background</p>
+            <h2>A dynamic hierarchy, not a fixed buffer</h2>
             <p class="lede">
-              Working memory holds the live episode; episodic memory stores compressed trajectories;
-              semantic memory distils reusable facts and skills. A single policy decides which tier
-              to touch at every step.
+              VideoTree grows a rigid tree via K-means, while VideoAgent and VCA maintain linear or sliding-window buffers. Their memory is constructed using heuristics or unsupervised objectives; consequently, nothing in the pipeline can be optimized end-to-end, and every decision is delegated to a large VLM backbone. RHM-Agent, however, organizes sparse visual evidence into a hierarchy that is dynamically pruned and intelligently expanded. Crucially, our entire pipeline is fully optimizable.
             </p>
           </header>
 
           <figure class="figure-card">
-            <button class="figure-zoom" type="button" aria-label="Enlarge the teaser figure">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the overview figure">
               <img
-                src="%BASE_URL%figures/teaser.svg"
-                alt="Diagram: a VLM agent observes an episode, writes to working, episodic, and semantic memory, and receives a hierarchical reward."
-                width="1200"
-                height="520"
+                src="%BASE_URL%figures/teaser.png"
+                alt="Three memory designs side by side. VideoTree uses a rigid tree without weight updates, VideoAgent and VCA use linear or sliding buffers with weight updates only in the agent, and RHM-Agent uses a dynamic hierarchy trained end-to-end. The lower half summarises HMBench-2K across marine, medical, industrial and driving domains with the frame brevity and node precision metrics."
+                width="1807"
+                height="1325"
                 loading="lazy"
               />
             </button>
             <figcaption>
-              <strong>Figure 1.</strong> RHM-Agent alternates between acting in the environment and
-              managing its own memory. Memory actions are sampled from the same policy as task
-              actions, and the hierarchical reward credits both the task return and the utility of
-              what was retained.
+              <strong>Figure 1.</strong> Overview of RHM-Agent and HMBench-2K. Only RHM-Agent
+              updates both the memory structure and the agent that navigates it. HMBench-2K covers
+              long egocentric video from four high-stakes domains and adds <em>frame brevity</em> and
+              <em>node precision</em> alongside answer accuracy.
             </figcaption>
           </figure>
         </div>
@@ -223,55 +250,78 @@
             <p class="kicker">Method</p>
             <h2>Memory as an action space</h2>
             <p class="lede">
-              Instead of a fixed context window, the agent owns a structured store and a learned
-              policy over memory operations.
+              Each iteration selects <em>N</em> nodes, rolls out <em>L</em> expansion steps, and
+              lets the agent decide whether to expand a node, exploit it, or commit an answer — with
+              a reward that is applied at every node instead of only at the end.
             </p>
           </header>
 
           <div class="steps">
             <article class="step">
               <span class="step-index">01</span>
-              <h3>Three-tier store</h3>
+              <h3>Hierarchical memory bank</h3>
               <p>
-                Working memory keeps the last <em>k</em> observations verbatim. Episodic memory
-                holds per-episode summaries keyed by goal and outcome. Semantic memory contains
-                distilled facts, tool affordances, and reusable sub-skills with embedding indices.
+                Frames are sampled uniformly and a binary mask tracks every
+                visited frame. An expandable node spawns two children halfway between its nearest
+                visited neighbours, so the tree partitions the timeline instead of revisit.
+                A maximum depth <em>D</em> bounds the expansion, avoid infinite loops.
               </p>
             </article>
             <article class="step">
               <span class="step-index">02</span>
-              <h3>Memory policy</h3>
+              <h3>RHM-Agent Reasoning</h3>
               <p>
-                Alongside task actions, the model emits <code>WRITE</code>, <code>COMPRESS</code>,
-                <code>RETRIEVE</code>, and <code>FORGET</code> calls. Each call is a tool with typed
-                arguments, so memory behaviour is auditable and inspectable.
+                Instead of expanding every node, the agent ranks the current node set against the
+                question and keeps the top <em>N</em>. Each selected node is then rolled out for up
+                to <em>L</em> decisions including <code>expand</code>, <code>exploit</code>, or an
+                <code>answer</code> leaf, dynamically adjust <em>N</em> and <em>L</em> let breadth and depth adapt to the query.
               </p>
             </article>
             <article class="step">
               <span class="step-index">03</span>
-              <h3>Reinforced consolidation</h3>
+              <h3>Local and global tree rewards</h3>
               <p>
-                Group-relative policy optimisation trades task return against retrieval utility and
-                memory cost. The agent is rewarded for memory that later proves useful, not for
-                writing more of it.
+                Leaf answers receive a bottom-up local reward that credits every node on the path;
+                the root answer receives a global reward. Their sum forms the advantage in a
+                group-relative policy optimisation step, which keeps the tree compact and the
+                reasoning paths traceable.
               </p>
             </article>
           </div>
 
           <figure class="figure-card">
-            <button class="figure-zoom" type="button" aria-label="Enlarge the method figure">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the framework figure">
               <img
-                src="%BASE_URL%figures/method.svg"
-                alt="Pipeline: episode rollout feeds a VLM policy that emits task and memory actions into a hierarchical memory store; a hierarchical reward trains the policy."
-                width="1200"
-                height="460"
+                src="%BASE_URL%figures/method.png"
+                alt="Framework overview. Left: the hierarchical memory bank over two iterations, with a maximum depth of four. Right: the RHM-Agent pipeline with N-node selection, L-times expansion over three nodes, and per-node expand, exploit, or answer decisions."
+                width="2494"
+                height="1110"
                 loading="lazy"
               />
             </button>
             <figcaption>
-              <strong>Figure 2.</strong> Training loop. Rollouts are interleaved with memory
-              operations; the consolidation reward is computed from downstream retrieval success, so
-              credit assignment spans episodes rather than steps.
+              <strong>Figure 2.</strong> The RHM framework. The memory bank (left) is refined
+              iteration by iteration, while the agentic reasoning loop (right) selects <em>N</em>
+              promising nodes, explores each of them for <em>L</em> steps, and decides per node
+              whether to expand, exploit, or terminate with an answer.
+            </figcaption>
+          </figure>
+
+          <figure class="figure-card">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the reward figure">
+              <img
+                src="%BASE_URL%figures/reward.png"
+                alt="Hierarchical reward mechanism. Local-tree rewards are assigned by bottom-up aggregation over leaf answers, global-tree rewards assign the root answer equally across nodes, and the summed advantage optimises the VLM policy via GRPO."
+                width="1753"
+                height="1650"
+                loading="lazy"
+              />
+            </button>
+            <figcaption>
+              <strong>Figure 3.</strong> Local and global tree rewards. Terminal-only supervision
+              discards trajectories that fail at the last step, so leaf answers are credited
+              bottom-up along their path; the root answer contributes an unconditioned global term,
+              and both are combined to optimise the VLM policy via GRPO.
             </figcaption>
           </figure>
         </div>
@@ -283,100 +333,210 @@
             <p class="kicker">Results</p>
             <h2>Stronger over long horizons</h2>
             <p class="lede">
-              Success rate (%) and average context tokens per episode. Higher is better for success;
-              lower is better for tokens.
+              An 8B RHM-Agent with a 16-frame budget beats 8B baselines using twice the frames and
+              32B models using four times the parameters. Because the memory is structured rather
+              than enlarged, the gain survives on egocentric video as well.
             </p>
           </header>
 
           <div class="stats">
             <div class="stat">
-              <span class="stat-value">+12.4</span>
-              <span class="stat-label">points success (long-horizon split)</span>
+              <span class="stat-value">+9.00</span>
+              <span class="stat-label">HMBench-2K average over the same 8B backbone</span>
             </div>
             <div class="stat">
-              <span class="stat-value">2.1&times;</span>
-              <span class="stat-label">fewer context tokens</span>
+              <span class="stat-value">+6.63</span>
+              <span class="stat-label">LVBench average with half the frames</span>
             </div>
             <div class="stat">
-              <span class="stat-value">3</span>
-              <span class="stat-label">benchmarks, one policy</span>
+              <span class="stat-value">+5.60</span>
+              <span class="stat-label">Ego4D over a 4&times; larger model</span>
             </div>
           </div>
 
           <div class="table-wrap">
             <table>
               <caption>
-                Table 1. Main results. <span class="note">Placeholder values, pending final runs.</span>
+                Table 1. Long-form and egocentric VideoQA. LVBench reports the average over its six
+                task types; accuracy is averaged over 500 sampled test questions per benchmark.
+                Best in bold.
               </caption>
               <thead>
                 <tr>
-                  <th scope="col">Method</th>
-                  <th scope="col">VisualNav</th>
-                  <th scope="col">GUI-Manip</th>
-                  <th scope="col">DocQA</th>
-                  <th scope="col">Tokens / ep.</th>
+                  <th scope="col">Model</th>
+                  <th scope="col">Params</th>
+                  <th scope="col">Frames</th>
+                  <th scope="col">LVBench</th>
+                  <th scope="col">EgoSchema</th>
+                  <th scope="col">Ego4D</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">VLM baseline (zero-shot)</th>
-                  <td>41.2</td>
-                  <td>38.7</td>
-                  <td>55.0</td>
-                  <td>18.4k</td>
+                  <th scope="row">Video-LLaVA</th>
+                  <td>7B</td>
+                  <td>16</td>
+                  <td>23.75</td>
+                  <td>17.60</td>
+                  <td>24.40</td>
                 </tr>
                 <tr>
-                  <th scope="row">+ full-history context</th>
-                  <td>46.8</td>
-                  <td>44.1</td>
-                  <td>58.3</td>
-                  <td>31.7k</td>
+                  <th scope="row">Video-LLaMA3</th>
+                  <td>7B</td>
+                  <td>32</td>
+                  <td>35.32</td>
+                  <td>52.50</td>
+                  <td>40.00</td>
                 </tr>
                 <tr>
-                  <th scope="row">+ flat summary memory</th>
-                  <td>49.5</td>
-                  <td>47.9</td>
-                  <td>61.2</td>
-                  <td>12.6k</td>
+                  <th scope="row">InternVL3</th>
+                  <td>8B</td>
+                  <td>32</td>
+                  <td>37.66</td>
+                  <td>70.40</td>
+                  <td>46.60</td>
+                </tr>
+                <tr>
+                  <th scope="row">InternVL3</th>
+                  <td>38B</td>
+                  <td>16</td>
+                  <td>40.73</td>
+                  <td>72.20</td>
+                  <td>50.80</td>
+                </tr>
+                <tr>
+                  <th scope="row">Qwen3-VL</th>
+                  <td>8B</td>
+                  <td>32</td>
+                  <td>35.95</td>
+                  <td>71.20</td>
+                  <td>51.00</td>
+                </tr>
+                <tr>
+                  <th scope="row">Qwen3-VL</th>
+                  <td>32B</td>
+                  <td>16</td>
+                  <td>37.07</td>
+                  <td>72.60</td>
+                  <td>53.40</td>
                 </tr>
                 <tr class="highlight">
                   <th scope="row">RHM-Agent (ours)</th>
-                  <td>58.9</td>
-                  <td>59.6</td>
-                  <td>68.4</td>
-                  <td>8.9k</td>
+                  <td>8B</td>
+                  <td>16</td>
+                  <td><strong>42.58</strong></td>
+                  <td><strong>73.20</strong></td>
+                  <td><strong>56.60</strong></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <figure class="figure-card">
-            <button class="figure-zoom" type="button" aria-label="Enlarge the scaling figure">
-              <img
-                src="%BASE_URL%figures/results.svg"
-                alt="Line chart: success rate versus episode length for the baseline, flat summary memory, and RHM-Agent."
-                width="1200"
-                height="460"
-                loading="lazy"
-              />
-            </button>
-            <figcaption>
-              <strong>Figure 3.</strong> Success as the horizon grows. Flat summaries degrade once
-              episodes exceed the summary budget; RHM-Agent keeps improving because semantic memory
-              accumulates across tasks.
-            </figcaption>
-          </figure>
+          <div class="table-wrap">
+            <table>
+              <caption>
+                Table 2. HMBench-2K, averaged per domain. Every entry uses a 16-frame budget unless
+                stated otherwise; RHM-Agent is fine-tuned on Qwen3-VL-8B, which it improves in every
+                domain except medical, where the proprietary backbones carry more clinical knowledge.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <th scope="col">Params</th>
+                  <th scope="col">Marine</th>
+                  <th scope="col">Medical</th>
+                  <th scope="col">Industrial</th>
+                  <th scope="col">Driving</th>
+                  <th scope="col">Average</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Qwen3-VL</th>
+                  <td>8B</td>
+                  <td>62.40</td>
+                  <td>20.60</td>
+                  <td>55.80</td>
+                  <td>60.80</td>
+                  <td>49.90</td>
+                </tr>
+                <tr>
+                  <th scope="row">Qwen3-VL</th>
+                  <td>32B</td>
+                  <td>62.80</td>
+                  <td>22.60</td>
+                  <td>69.80</td>
+                  <td>60.80</td>
+                  <td>54.00</td>
+                </tr>
+                <tr>
+                  <th scope="row">InternVL3</th>
+                  <td>38B</td>
+                  <td>64.00</td>
+                  <td>28.80</td>
+                  <td>66.60</td>
+                  <td>66.00</td>
+                  <td>56.35</td>
+                </tr>
+                <tr>
+                  <th scope="row">GPT-5-mini</th>
+                  <td>&mdash;</td>
+                  <td>58.40</td>
+                  <td>25.60</td>
+                  <td>60.20</td>
+                  <td>72.80</td>
+                  <td>54.25</td>
+                </tr>
+                <tr>
+                  <th scope="row">Gemini-3.1-Flash-Lite</th>
+                  <td>&mdash;</td>
+                  <td>60.60</td>
+                  <td><strong>28.00</strong></td>
+                  <td>68.20</td>
+                  <td>70.80</td>
+                  <td>56.90</td>
+                </tr>
+                <tr>
+                  <th scope="row">VideoTree</th>
+                  <td>&mdash;</td>
+                  <td>62.80</td>
+                  <td>26.00</td>
+                  <td>64.00</td>
+                  <td>65.00</td>
+                  <td>54.45</td>
+                </tr>
+                <tr class="highlight">
+                  <th scope="row">RHM-Agent (ours)</th>
+                  <td>8B</td>
+                  <td><strong>65.80</strong></td>
+                  <td>24.00</td>
+                  <td><strong>69.40</strong></td>
+                  <td><strong>76.40</strong></td>
+                  <td><strong>58.90</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="lede">
+            Against dynamic memory agents the gap widens: +12.30% average accuracy over VideoAgent
+            and +7.15% over VCA on HMBench-2K, with higher node precision (+0.29% over VideoAgent,
+            +0.59% over VCA) and better frame brevity than VCA. Memory depth helps only where the
+            videos are long enough to need it — deeper trees help the 8B model on Ego4D up to depth
+            five, but hurt smaller models on the much shorter EgoSchema clips.
+          </p>
         </div>
       </section>
 
       <section class="section" id="demo">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Demo</p>
-            <h2>A memory trace you can step through</h2>
+            <p class="kicker">Qualitative trace</p>
+            <h2>Following one query through the tree</h2>
             <p class="lede">
-              One synthetic episode, replayed. Watch where the agent chooses to write, compress, and
-              retrieve — and what that buys it later.
+              The marine example from the paper: “After the diver retrieves a small metallic object
+              from the seabed, what does the diver do next?” A linear buffer never reaches the
+              retrieval moment; the hierarchy expands straight toward it and prunes the rest.
             </p>
           </header>
 
@@ -399,11 +559,11 @@
           </header>
           <div class="bibtex">
             <button class="btn btn-small copy-btn" id="copy-bibtex" type="button">Copy BibTeX</button>
-            <pre><code id="bibtex">@inproceedings{rhmagent2026,
+            <pre><code id="bibtex">@inproceedings{rhmagent2027,
   title     = {RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory},
   author    = {Anonymous Authors},
-  booktitle = {Under review},
-  year      = {2026}
+  booktitle = {Anonymous},
+  year      = {2027}
 }</code></pre>
           </div>
         </div>
@@ -413,10 +573,7 @@
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <p>© 2026 Anonymous Authors. Page content is released for review purposes.</p>
-        <p class="footer-meta">
-          Built with Vite &amp; TypeScript ·
-          <a href="https://github.com/ToTuanAn/rhm-agent-website">Source</a>
-        </p>
+        <p class="footer-meta">Built with Vite &amp; TypeScript</p>
       </div>
     </footer>
 

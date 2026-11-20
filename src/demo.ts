@@ -1,4 +1,4 @@
-type TraceKind = "observe" | "plan" | "write" | "retrieve" | "answer";
+type TraceKind = "select" | "expand" | "exploit" | "answer";
 
 interface DemoStep {
   kind: TraceKind;
@@ -8,35 +8,42 @@ interface DemoStep {
 
 const STEP_DELAY_MS = 700;
 
+/** Traced from the marine example in Fig. 6 of the paper. */
 const STEPS: readonly DemoStep[] = [
   {
-    kind: "observe",
-    text: "Frame <code>t=0</code>: kitchen counter, drawer half open, mug on shelf S2.",
-  },
-  { kind: "observe", text: "Four recent frames appended to working memory (4/4 slots)." },
-  { kind: "plan", text: "Goal: move the mug beside the kettle without toppling the stack." },
-  {
-    kind: "write",
-    text: "<code>WRITE</code> semantic ← <code>grasp_point(drawer_handle) = (0.42, 0.71)</code>",
+    kind: "select",
+    text: "Iteration 1 — rank the 16 sampled start frames by <code>Nscore</code>; keep <em>N</em> = 3.",
   },
   {
-    kind: "write",
-    text: "<code>COMPRESS</code> episodic 3 → “drawer → mug → traverse”, score 0.86",
+    kind: "expand",
+    text: "Node <code>A2</code> → expand into <code>B1</code> and <code>B2</code> (descent toward the wreck).",
   },
   {
-    kind: "retrieve",
-    text: "<code>RETRIEVE</code> “where did the mug rest last time?” → episodic #12 (sim 0.91)",
+    kind: "exploit",
+    text: "Node <code>B3</code> exploited: the seabed handling already sits inside <code>B4</code>'s interval.",
   },
   {
-    kind: "plan",
-    text: "Reuse the <code>traverse</code> skill; skip re-exploring the left cabinet.",
+    kind: "expand",
+    text: "Node <code>A3</code> → expand into <code>C3</code> and <code>C4</code> around the retrieval moment.",
+  },
+  {
+    kind: "exploit",
+    text: "Node <code>C2</code> exploited: the diver grips a small metallic object at the seabed.",
+  },
+  {
+    kind: "expand",
+    text: "Node <code>C1</code> → expand into <code>D1</code> and <code>D2</code> to cover the ascent.",
   },
   {
     kind: "answer",
-    text: "Success in 41 steps · 8.9k context tokens (baseline 18.4k).",
+    text: 'Leaf <code>&lt;answer&gt;</code> “The diver resurfaces with the find” — node marked inactive.',
+  },
+  {
+    kind: "answer",
+    text: "Root answer from the top-K scored frames: same option, 6 of 16 frames carried the evidence.",
   },
 ];
-
+ 
 export function initDemo(): void {
   const list = document.querySelector<HTMLOListElement>("#demo-trace");
   const runButton = document.querySelector<HTMLButtonElement>("#demo-run");
@@ -64,7 +71,7 @@ export function initDemo(): void {
     }
 
     if (id === runId) {
-      status.textContent = `Done — ${STEPS.length} steps, 8.9k tokens.`;
+      status.textContent = `Done — ${STEPS.length} steps, 6 of 16 frames kept.`;
       runButton.disabled = false;
     }
   });

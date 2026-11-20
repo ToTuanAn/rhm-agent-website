@@ -1,0 +1,8 @@
+/**
+ * Bundled media shared by the hero backdrop and the overview player.
+ * Vite rewrites this import to a hashed asset URL at build time.
+ */
+import introUrl from "../data/intro.mp4?url";
+import summaryUrl from "../data/summary.mp4?url";
+
+export { introUrl, summaryUrl };

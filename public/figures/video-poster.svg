@@ -1,51 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="v-title">
-  <title id="v-title">Video poster for RHM-Agent, showing a hierarchy of working, episodic, and semantic memory.</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="vp-title vp-desc">
+  <title id="vp-title">Video poster for the RHM-Agent five-minute overview.</title>
+  <desc id="vp-desc">A dark navy plate with the paper title on the left and a hierarchical memory tree on the right, where the agent selects nodes, expands them, and terminates with an answer.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#12131f" />
-      <stop offset="55%" stop-color="#1b1a3a" />
-      <stop offset="100%" stop-color="#0d2a33" />
+    <linearGradient id="vp-bg" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#050a16" />
+      <stop offset="52%" stop-color="#0a1730" />
+      <stop offset="100%" stop-color="#062035" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#7c78ff" stop-opacity="0.55" />
-      <stop offset="100%" stop-color="#7c78ff" stop-opacity="0" />
+    <radialGradient id="vp-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2f7fd0" stop-opacity="0.42" />
+      <stop offset="100%" stop-color="#2f7fd0" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="vp-glow-2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3fd0ff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#3fd0ff" stop-opacity="0" />
     </radialGradient>
   </defs>
 
-  <rect width="1200" height="675" fill="url(#bg)" />
-  <ellipse cx="880" cy="180" rx="420" ry="300" fill="url(#glow)" />
+  <rect width="1200" height="675" fill="url(#vp-bg)" />
+  <ellipse cx="905" cy="300" rx="430" ry="330" fill="url(#vp-glow)" />
+  <ellipse cx="150" cy="640" rx="380" ry="240" fill="url(#vp-glow-2)" />
 
-  <g stroke="#ffffff" stroke-opacity="0.05">
-    <path d="M0 120 H1200 M0 240 H1200 M0 360 H1200 M0 480 H1200 M0 600 H1200" />
-    <path d="M120 0 V675 M240 0 V675 M360 0 V675 M480 0 V675 M600 0 V675 M720 0 V675 M840 0 V675 M960 0 V675 M1080 0 V675" />
+  <g stroke="#92b2f0" stroke-opacity="0.06">
+    <path d="M0 135 H1200 M0 270 H1200 M0 405 H1200 M0 540 H1200" />
+    <path d="M150 0 V675 M300 0 V675 M450 0 V675 M600 0 V675 M750 0 V675 M900 0 V675 M1050 0 V675" />
   </g>
 
-  <text x="90" y="150" font-family="ui-monospace, monospace" font-size="16" letter-spacing="6" fill="#9a95ff">5-MINUTE OVERVIEW</text>
+  <text x="90" y="150" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="16" letter-spacing="6" fill="#7f92b7">PAPER SUMMARY</text>
 
-  <text x="90" y="270" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="700" fill="#ffffff">RHM-Agent</text>
-  <text x="90" y="330" font-family="ui-sans-serif, system-ui, sans-serif" font-size="24" fill="#c7c9fb">
+  <text x="90" y="264" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="78" font-weight="700" fill="#eef4ff">RHM-Agent</text>
+  <text x="90" y="322" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="23" fill="#a5b6d6">
     Teaching VLMs to Reinforce Hierarchical Memory
   </text>
 
-  <!-- memory tiers -->
-  <g>
-    <rect x="90" y="400" width="300" height="54" rx="12" fill="#0ea5e9" fill-opacity="0.18" stroke="#38bdf8" stroke-opacity="0.5" />
-    <text x="112" y="424" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#bae6fd">Working</text>
-    <text x="112" y="443" font-family="ui-monospace, monospace" font-size="11" fill="#7dd3fc">current episode</text>
-
-    <rect x="90" y="466" width="300" height="54" rx="12" fill="#f59e0b" fill-opacity="0.16" stroke="#fbbf24" stroke-opacity="0.5" />
-    <text x="112" y="490" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#fde68a">Episodic</text>
-    <text x="112" y="509" font-family="ui-monospace, monospace" font-size="11" fill="#fcd34d">compressed trajectories</text>
-
-    <rect x="90" y="532" width="300" height="54" rx="12" fill="#22c55e" fill-opacity="0.16" stroke="#4ade80" stroke-opacity="0.5" />
-    <text x="112" y="556" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#bbf7d0">Semantic</text>
-    <text x="112" y="575" font-family="ui-monospace, monospace" font-size="11" fill="#86efac">facts · skills · affordances</text>
+  <g font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace" font-size="16" fill="#9fb6dd">
+    <text x="90" y="392">N-node selection · L-times expansion</text>
+    <text x="90" y="426">Local and global tree rewards</text>
+    <text x="90" y="460">HMBench-2K · frame brevity · node precision</text>
   </g>
 
-  <!-- reward formula -->
-  <g opacity="0.9">
-    <text x="470" y="440" font-family="ui-monospace, monospace" font-size="15" fill="#a5b4fc">r = task return</text>
-    <text x="470" y="468" font-family="ui-monospace, monospace" font-size="15" fill="#a5b4fc">    + λ · retrieval utility</text>
-    <text x="470" y="496" font-family="ui-monospace, monospace" font-size="15" fill="#a5b4fc">    − μ · memory cost</text>
+  <!-- hierarchical memory tree -->
+  <g stroke="#3a5b96" stroke-width="2" fill="none">
+    <path d="M905 250 L828 330 M905 250 L982 330" />
+    <path d="M828 330 L784 410 M828 330 L872 410" />
+    <path d="M982 330 L938 410 M982 330 L1026 410" />
+    <path d="M872 410 L872 486" />
+  </g>
+
+  <g>
+    <circle cx="905" cy="250" r="17" fill="#1b3a6b" stroke="#5b8cff" stroke-width="2.5" />
+    <circle cx="828" cy="330" r="15" fill="#12294f" stroke="#5b8cff" stroke-width="2.5" />
+    <circle cx="982" cy="330" r="15" fill="#12294f" stroke="#3a5b96" stroke-width="2" />
+    <circle cx="784" cy="410" r="13" fill="#0d1f3d" stroke="#3a5b96" stroke-width="2" />
+    <circle cx="872" cy="410" r="13" fill="#1b3a6b" stroke="#5b8cff" stroke-width="2.5" />
+    <circle cx="938" cy="410" r="13" fill="#0d1f3d" stroke="#3a5b96" stroke-width="2" />
+    <circle cx="1026" cy="410" r="13" fill="#0d1f3d" stroke="#3a5b96" stroke-width="2" />
+    <circle cx="872" cy="486" r="14" fill="#0b2a25" stroke="#55d6b0" stroke-width="2.5" />
+  </g>
+
+  <g font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="15">
+    <text x="740" y="230" fill="#7f92b7">select N</text>
+    <text x="596" y="404" fill="#7f92b7" text-anchor="end">expand</text>
+    <text x="892" y="452" fill="#f0c069">exploit</text>
+    <text x="892" y="516" fill="#55d6b0">answer</text>
   </g>
 </svg>

@@ -1,63 +1,51 @@
 :root {
-  --paper: #fbfaf7;
-  --surface: #ffffff;
-  --surface-2: #f4f2ee;
-  --ink: #14161a;
-  --ink-2: #565b66;
-  --ink-3: #7b818d;
-  --line: rgb(20 22 26 / 10%);
-  --line-strong: rgb(20 22 26 / 18%);
-  --accent: #4c46d6;
-  --accent-ink: #ffffff;
-  --accent-soft: rgb(76 70 214 / 8%);
-  --gold: #b0791f;
-  --green: #1f7a5c;
+  /* Dark blue is the house style: deep navy paper, cool ink, electric blue accent. */
+  --paper: #050b18;
+  --surface: #0a1730;
+  --surface-2: #102445;
+  --ink: #e8effc;
+  --ink-2: #a5b6d6;
+  --ink-3: #7f92b7;
+  --line: rgb(146 178 240 / 14%);
+  --line-strong: rgb(146 178 240 / 26%);
+  --accent: #3f7dfb;
+  --accent-ink: #04101f;
+  --accent-soft: rgb(63 125 251 / 16%);
+  --gold: #f0c069;
+  --green: #55d6b0;
   --radius: 16px;
-  --shadow-sm: 0 1px 2px rgb(16 18 22 / 6%), 0 1px 1px rgb(16 18 22 / 4%);
-  --shadow-md: 0 12px 32px -12px rgb(16 18 22 / 22%);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 45%);
+  --shadow-md: 0 16px 40px -16px rgb(0 0 0 / 75%);
   --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --font-sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   --header-h: 64px;
-  color-scheme: light;
-}
-
-:root[data-theme="dark"] {
-  --paper: #0c0e13;
-  --surface: #14171f;
-  --surface-2: #1b1f29;
-  --ink: #eceef4;
-  --ink-2: #a9b0bd;
-  --ink-3: #838b99;
-  --line: rgb(236 238 244 / 12%);
-  --line-strong: rgb(236 238 244 / 22%);
-  --accent: #9a95ff;
-  --accent-ink: #12131a;
-  --accent-soft: rgb(154 149 255 / 12%);
-  --gold: #e0b063;
-  --green: #58c9a2;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
-  --shadow-md: 0 16px 40px -16px rgb(0 0 0 / 70%);
+  /* Hero video scrim colour (space-separated channels, used as rgb(var(--hero-scrim) / a)). */
+  --hero-scrim: 5 11 24;
+  --hero-video-opacity: 0.55;
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --paper: #0c0e13;
-    --surface: #14171f;
-    --surface-2: #1b1f29;
-    --ink: #eceef4;
-    --ink-2: #a9b0bd;
-    --ink-3: #838b99;
-    --line: rgb(236 238 244 / 12%);
-    --line-strong: rgb(236 238 244 / 22%);
-    --accent: #9a95ff;
-    --accent-ink: #12131a;
-    --accent-soft: rgb(154 149 255 / 12%);
-    --gold: #e0b063;
-    --green: #58c9a2;
-    color-scheme: dark;
-  }
+:root[data-theme="light"] {
+  --paper: #f3f6fd;
+  --surface: #ffffff;
+  --surface-2: #e8eefb;
+  --ink: #0a1526;
+  --ink-2: #46587a;
+  --ink-3: #6b7d9d;
+  --line: rgb(12 27 54 / 10%);
+  --line-strong: rgb(12 27 54 / 18%);
+  --accent: #2a58d8;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(42 88 216 / 8%);
+  --gold: #a8761b;
+  --green: #16795a;
+  --shadow-sm: 0 1px 2px rgb(10 21 38 / 8%), 0 1px 1px rgb(10 21 38 / 5%);
+  --shadow-md: 0 12px 32px -12px rgb(10 21 38 / 24%);
+  --hero-scrim: 243 246 253;
+  --hero-video-opacity: 0.16;
+  --hero-video-blend: multiply;
+  color-scheme: light;
 }
 
 *,
@@ -171,12 +159,15 @@ code {
   white-space: nowrap;
 }
 
+/* Brand mark: the paper logo artwork is dark-on-cream, so it keeps its own light tile. */
 .brand-mark {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: linear-gradient(140deg, var(--accent), color-mix(in srgb, var(--accent) 45%, #22d3ee));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 25%);
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f1f1ec;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 22%), 0 1px 3px rgb(0 0 0 / 35%);
 }
 
 .nav {
@@ -289,12 +280,80 @@ code {
   background: transparent;
 }
 
+/* Release buttons whose artifact is not published yet: visible, but not a link. */
+.btn.is-soon {
+  cursor: default;
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+  color: var(--ink-2);
+}
+
+.btn.is-soon:hover {
+  transform: none;
+  box-shadow: none;
+  background: color-mix(in srgb, var(--surface) 45%, transparent);
+}
+
+.btn .soon {
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-left: 0.55rem;
+  border-left: 1px solid var(--line-strong);
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
   position: relative;
-  padding-block: clamp(3.5rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4rem);
+  isolation: isolate;
+  padding-block: clamp(4.5rem, 10vw, 7rem) clamp(2.5rem, 6vw, 4rem);
   overflow: hidden;
+}
+
+/* Intro footage sits behind the hero; it fades away as the page scrolls (see src/hero-video.ts). */
+.hero-backdrop {
+  position: absolute;
+  inset: -1px -1px 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  transform-origin: 50% 20%;
+  will-change: opacity, transform;
+  background:
+    radial-gradient(46% 58% at 22% 30%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 70%),
+    radial-gradient(42% 55% at 80% 12%, color-mix(in srgb, #22d3ee 18%, transparent), transparent 72%),
+    var(--paper);
+}
+
+.hero-backdrop video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: var(--hero-video-opacity, 0.5);
+  filter: saturate(0.9) contrast(1.08);
+  mix-blend-mode: var(--hero-video-blend, luminosity);
+}
+
+/* Scrim: keeps the headline legible over the footage and melts into the page below. */
+.hero-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgb(var(--hero-scrim) / 78%) 0%,
+      rgb(var(--hero-scrim) / 60%) 40%,
+      rgb(var(--hero-scrim) / 88%) 80%,
+      rgb(var(--hero-scrim) / 100%) 100%
+    ),
+    radial-gradient(120% 90% at 50% 0%, transparent 32%, rgb(var(--hero-scrim) / 55%) 100%);
 }
 
 .hero::before {
@@ -310,6 +369,7 @@ code {
 
 .hero-inner {
   position: relative;
+  z-index: 1;
   text-align: center;
 }
 
@@ -334,6 +394,18 @@ code {
   color: var(--ink-2);
 }
 
+/* The hero sits on top of video, so its chrome turns to frosted glass. */
+.hero .eyebrow {
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  backdrop-filter: blur(10px) saturate(1.3);
+  color: var(--ink);
+}
+
+.hero h1,
+.hero .authors {
+  text-shadow: 0 2px 26px rgb(var(--hero-scrim) / 70%);
+}
+
 .hero h1 {
   font-size: clamp(2.1rem, 5.2vw, 3.6rem);
   line-height: 1.1;
@@ -341,7 +413,7 @@ code {
 }
 
 .hero h1 .accent {
-  background: linear-gradient(100deg, var(--accent), #3f8fd0 70%);
+  background: linear-gradient(100deg, var(--accent), #3fd0ff 70%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -370,14 +442,15 @@ code {
 }
 
 .abstract {
-  max-width: 760px;
+  max-width: 100%;
   margin-inline: auto;
   text-align: left;
   padding: clamp(1.4rem, 3vw, 2.1rem) clamp(1.3rem, 3vw, 2.2rem);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--surface) 85%, transparent);
-  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: var(--shadow-md);
 }
 
 .abstract h2 {
@@ -410,7 +483,6 @@ code {
 }
 
 .section-head {
-  max-width: 680px;
   margin-bottom: 2.2rem;
 }
 
@@ -424,7 +496,6 @@ code {
   margin: 0;
   color: var(--ink-2);
   font-size: 1.02rem;
-  max-width: 62ch;
 }
 
 /* ---------- Video ---------- */
@@ -441,7 +512,8 @@ code {
 }
 
 .video-frame img,
-.video-frame iframe {
+.video-frame iframe,
+.video-frame video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -540,11 +612,13 @@ code {
   width: 100%;
   padding: 0;
   border: 0;
-  background: var(--surface);
+  /* The paper figures are authored on white, so they keep a white plate in both themes. */
+  background: #fff;
   cursor: zoom-in;
 }
 
 .figure-zoom img {
+  display: block;
   width: 100%;
 }
 
@@ -789,24 +863,20 @@ tr.highlight:hover {
   text-transform: uppercase;
 }
 
-.trace-item[data-kind="observe"] .trace-kind {
+.trace-item[data-kind="select"] .trace-kind {
   color: var(--ink-3);
 }
 
-.trace-item[data-kind="plan"] .trace-kind {
+.trace-item[data-kind="expand"] .trace-kind {
   color: #2f7fd0;
 }
 
-.trace-item[data-kind="write"] .trace-kind {
+.trace-item[data-kind="exploit"] .trace-kind {
   color: var(--gold);
 }
 
-.trace-item[data-kind="retrieve"] .trace-kind {
-  color: var(--green);
-}
-
 .trace-item[data-kind="answer"] .trace-kind {
-  color: var(--accent);
+  color: var(--green);
 }
 
 .trace-text {
