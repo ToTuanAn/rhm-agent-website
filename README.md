@@ -16,7 +16,7 @@ a normal paper page.
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173/rhm-agent-website/
+npm run dev        # http://localhost:5173/
 ```
 
 Other scripts:
@@ -29,8 +29,9 @@ npm run build      # typecheck + vite build -> dist/
 npm run preview    # serve dist/ locally
 ```
 
-`npm run dev` and `npm run preview` serve under the `/rhm-agent-website/` base path. To develop at the
-root (`http://localhost:5173/`), run with `VITE_BASE=/ npm run dev`.
+`npm run dev` and `npm run preview` serve from the root (`http://localhost:5173/`), matching the custom
+domain. If you need to reproduce the `https://<user>.github.io/<repo>/` path locally, build with
+`VITE_BASE=/rhm-agent-website/`.
 
 ## Replacing the placeholders
 
@@ -58,25 +59,46 @@ One-time setup:
 2. Go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
 3. Push to `main` (or run the workflow manually from the **Actions** tab).
 
-The site is then served from `https://<user>.github.io/<repo>/`. The `base` path in `vite.config.ts`
-defaults to `/rhm-agent-website/` to match the repository name.
+### Custom domain
 
-### Different base path
+The site is published at **https://rhm-agent.site/** (configured in **Settings → Pages → Custom
+domain**). Two things make that work and must stay in place:
 
-`vite.config.ts` reads the base from the `VITE_BASE` environment variable:
+- `vite.config.ts` has `base: "/"` — on a custom domain the site is served from the domain root, so
+  assets must be requested as `/assets/...`, not `/rhm-agent-website/assets/...`.
+- `public/CNAME` contains `rhm-agent.site`, which is copied into `dist/` on every build. Without it a
+  new deployment would drop the custom domain and the site would fall back to
+  `https://<user>.github.io/<repo>/`. The workflow also passes `cname: rhm-agent.site` to
+  `actions/configure-pages` as a second safeguard.
+
+DNS (at your registrar):
+
+| Type | Name | Value |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| CNAME | `www` | `<user>.github.io.` |
+
+Then tick **Enforce HTTPS** once the certificate is issued.
+
+### Building for the `github.io/<repo>/` path instead
+
+The base path is overridable, which is what you need if the custom domain is ever removed:
 
 ```bash
-VITE_BASE=/ npm run build   # user/org site (https://<user>.github.io/) or a custom domain
+VITE_BASE=/rhm-agent-website/ npm run build
 ```
 
-To make the GitHub Actions build use a different base, add it to the build step:
+To make the GitHub Actions build use it, set it on the build step:
 
 ```yaml
 - name: Build
   run: npm run build
   env:
-    VITE_BASE: /
+    VITE_BASE: /rhm-agent-website/
 ```
+
+The site is then served from `https://<user>.github.io/<repo>/` (remove `public/CNAME` and the
+`cname:` input in that case).
 
 ## Project layout
 
@@ -90,6 +112,6 @@ src/lightbox.ts            # click a figure to enlarge it
 src/copy-bibtex.ts         # citation copy button
 src/demo.ts                # scripted memory-trace demo
 src/styles.css             # design tokens, layout, responsive rules
-public/                    # static assets copied as-is (PDF, figures, favicon)
+public/                    # static assets copied as-is (PDF, figures, favicon, CNAME)
 .github/workflows/deploy.yml
 ```
