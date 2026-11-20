@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory</title>
+    <meta
+      name="description"
+      content="RHM-Agent equips vision-language agents with a three-tier memory and trains them with reinforcement learning to write, compress, and retrieve it."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta property="og:title" content="RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory" />
+    <meta
+      property="og:description"
+      content="A reinforcement-learned hierarchical memory for vision-language agents."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <script>
+      // Apply the saved theme before first paint so the page never flashes.
+      (() => {
+        try {
+          const saved = localStorage.getItem("rhm-theme");
+          const dark =
+            saved === "dark" ||
+            (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.dataset.theme = dark ? "dark" : "light";
+        } catch {
+          /* storage blocked: fall back to the default theme */
+        }
+      })();
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"></span>
+          RHM-Agent
+        </a>
+
+        <nav class="nav" aria-label="Section navigation">
+          <a href="#video">Video</a>
+          <a href="#teaser">Overview</a>
+          <a href="#method">Method</a>
+          <a href="#results">Results</a>
+          <a href="#demo">Demo</a>
+          <a href="#citation">Cite</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn btn-small btn-primary" href="%BASE_URL%paper.pdf">Paper</a>
+          <button
+            class="icon-btn"
+            id="theme-toggle"
+            type="button"
+            aria-label="Switch color theme"
+            title="Switch color theme"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10L5.6 18.4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="wrap hero-inner">
+          <p class="eyebrow">Preprint · Under review</p>
+          <h1>
+            RHM-Agent: Teaching VLMs to Reinforce<br class="wide-only" />
+            <span class="accent">Hierarchical Memory</span>
+          </h1>
+          <p class="authors">Anonymous Authors</p>
+          <p class="affiliation">Author information withheld for double-blind review</p>
+
+          <ul class="hero-actions">
+            <li>
+              <a class="btn btn-primary" href="%BASE_URL%paper.pdf">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M7 3h7l5 5v13H7z M14 3v5h5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Paper (PDF)
+              </a>
+            </li>
+            <li>
+              <a class="btn" href="#video">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+                </svg>
+                5-min video
+              </a>
+            </li>
+            <!-- Remove this link before submitting for blind review. -->
+            <li>
+              <a class="btn" href="https://github.com/ToTuanAn/rhm-agent-website">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Code
+              </a>
+            </li>
+          </ul>
+
+          <div class="abstract">
+            <h2>Abstract</h2>
+            <p>
+              Vision-language models excel at grounded perception, yet they treat every episode as
+              independent: context is flattened into a lossy transcript and nothing learned in one
+              task makes the next one easier. We introduce <strong>RHM-Agent</strong>, a framework
+              that gives a VLM agent an explicit three-tier memory — working, episodic, and semantic
+              — and trains it with reinforcement learning to decide what to write, what to compress,
+              and what to retrieve. A hierarchical reward couples task success with memory
+              efficiency, so the agent learns compact, transferable representations instead of
+              replaying raw history. Across long-horizon visual navigation, GUI manipulation, and
+              multi-page document QA, RHM-Agent raises task success while using a fraction of the
+              context tokens, and the memory it writes transfers to unseen tasks without additional
+              fine-tuning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="video">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Overview</p>
+            <h2>Five-minute walkthrough</h2>
+            <p class="lede">
+              The memory loop end to end: what the agent observes, how it decides to consolidate,
+              and how the reward shapes what survives.
+            </p>
+          </header>
+
+          <figure class="video-frame" data-video-embed="">
+            <img
+              src="%BASE_URL%figures/video-poster.svg"
+              alt="Video poster: RHM-Agent hierarchy of working, episodic, and semantic memory."
+              width="1200"
+              height="675"
+            />
+            <button class="video-play" id="video-play" type="button">
+              <span class="video-play-icon" aria-hidden="true"></span>
+              <span class="video-play-label">Play the 5-minute overview</span>
+            </button>
+            <p class="video-hint" id="video-hint" role="status" hidden>
+              No video linked yet — set <code>data-video-embed</code> on the video frame in
+              <code>index.html</code>.
+            </p>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="teaser">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Teaser</p>
+            <h2>One policy, three timescales of memory</h2>
+            <p class="lede">
+              Working memory holds the live episode; episodic memory stores compressed trajectories;
+              semantic memory distils reusable facts and skills. A single policy decides which tier
+              to touch at every step.
+            </p>
+          </header>
+
+          <figure class="figure-card">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the teaser figure">
+              <img
+                src="%BASE_URL%figures/teaser.svg"
+                alt="Diagram: a VLM agent observes an episode, writes to working, episodic, and semantic memory, and receives a hierarchical reward."
+                width="1200"
+                height="520"
+                loading="lazy"
+              />
+            </button>
+            <figcaption>
+              <strong>Figure 1.</strong> RHM-Agent alternates between acting in the environment and
+              managing its own memory. Memory actions are sampled from the same policy as task
+              actions, and the hierarchical reward credits both the task return and the utility of
+              what was retained.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="method">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Method</p>
+            <h2>Memory as an action space</h2>
+            <p class="lede">
+              Instead of a fixed context window, the agent owns a structured store and a learned
+              policy over memory operations.
+            </p>
+          </header>
+
+          <div class="steps">
+            <article class="step">
+              <span class="step-index">01</span>
+              <h3>Three-tier store</h3>
+              <p>
+                Working memory keeps the last <em>k</em> observations verbatim. Episodic memory
+                holds per-episode summaries keyed by goal and outcome. Semantic memory contains
+                distilled facts, tool affordances, and reusable sub-skills with embedding indices.
+              </p>
+            </article>
+            <article class="step">
+              <span class="step-index">02</span>
+              <h3>Memory policy</h3>
+              <p>
+                Alongside task actions, the model emits <code>WRITE</code>, <code>COMPRESS</code>,
+                <code>RETRIEVE</code>, and <code>FORGET</code> calls. Each call is a tool with typed
+                arguments, so memory behaviour is auditable and inspectable.
+              </p>
+            </article>
+            <article class="step">
+              <span class="step-index">03</span>
+              <h3>Reinforced consolidation</h3>
+              <p>
+                Group-relative policy optimisation trades task return against retrieval utility and
+                memory cost. The agent is rewarded for memory that later proves useful, not for
+                writing more of it.
+              </p>
+            </article>
+          </div>
+
+          <figure class="figure-card">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the method figure">
+              <img
+                src="%BASE_URL%figures/method.svg"
+                alt="Pipeline: episode rollout feeds a VLM policy that emits task and memory actions into a hierarchical memory store; a hierarchical reward trains the policy."
+                width="1200"
+                height="460"
+                loading="lazy"
+              />
+            </button>
+            <figcaption>
+              <strong>Figure 2.</strong> Training loop. Rollouts are interleaved with memory
+              operations; the consolidation reward is computed from downstream retrieval success, so
+              credit assignment spans episodes rather than steps.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="results">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Results</p>
+            <h2>Stronger over long horizons</h2>
+            <p class="lede">
+              Success rate (%) and average context tokens per episode. Higher is better for success;
+              lower is better for tokens.
+            </p>
+          </header>
+
+          <div class="stats">
+            <div class="stat">
+              <span class="stat-value">+12.4</span>
+              <span class="stat-label">points success (long-horizon split)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">2.1&times;</span>
+              <span class="stat-label">fewer context tokens</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">3</span>
+              <span class="stat-label">benchmarks, one policy</span>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <caption>
+                Table 1. Main results. <span class="note">Placeholder values, pending final runs.</span>
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">VisualNav</th>
+                  <th scope="col">GUI-Manip</th>
+                  <th scope="col">DocQA</th>
+                  <th scope="col">Tokens / ep.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">VLM baseline (zero-shot)</th>
+                  <td>41.2</td>
+                  <td>38.7</td>
+                  <td>55.0</td>
+                  <td>18.4k</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ full-history context</th>
+                  <td>46.8</td>
+                  <td>44.1</td>
+                  <td>58.3</td>
+                  <td>31.7k</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ flat summary memory</th>
+                  <td>49.5</td>
+                  <td>47.9</td>
+                  <td>61.2</td>
+                  <td>12.6k</td>
+                </tr>
+                <tr class="highlight">
+                  <th scope="row">RHM-Agent (ours)</th>
+                  <td>58.9</td>
+                  <td>59.6</td>
+                  <td>68.4</td>
+                  <td>8.9k</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <figure class="figure-card">
+            <button class="figure-zoom" type="button" aria-label="Enlarge the scaling figure">
+              <img
+                src="%BASE_URL%figures/results.svg"
+                alt="Line chart: success rate versus episode length for the baseline, flat summary memory, and RHM-Agent."
+                width="1200"
+                height="460"
+                loading="lazy"
+              />
+            </button>
+            <figcaption>
+              <strong>Figure 3.</strong> Success as the horizon grows. Flat summaries degrade once
+              episodes exceed the summary budget; RHM-Agent keeps improving because semantic memory
+              accumulates across tasks.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="demo">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Demo</p>
+            <h2>A memory trace you can step through</h2>
+            <p class="lede">
+              One synthetic episode, replayed. Watch where the agent chooses to write, compress, and
+              retrieve — and what that buys it later.
+            </p>
+          </header>
+
+          <div class="demo">
+            <div class="demo-controls">
+              <button class="btn btn-primary" id="demo-run" type="button">Run example</button>
+              <button class="btn btn-ghost" id="demo-reset" type="button">Reset</button>
+              <p class="demo-status" id="demo-status" role="status">Idle — 8 steps queued.</p>
+            </div>
+            <ol class="demo-trace" id="demo-trace" aria-live="polite"></ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="citation">
+        <div class="wrap narrow">
+          <header class="section-head">
+            <p class="kicker">Citation</p>
+            <h2>Cite this work</h2>
+          </header>
+          <div class="bibtex">
+            <button class="btn btn-small copy-btn" id="copy-bibtex" type="button">Copy BibTeX</button>
+            <pre><code id="bibtex">@inproceedings{rhmagent2026,
+  title     = {RHM-Agent: Teaching VLMs to Reinforce Hierarchical Memory},
+  author    = {Anonymous Authors},
+  booktitle = {Under review},
+  year      = {2026}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <p>© 2026 Anonymous Authors. Page content is released for review purposes.</p>
+        <p class="footer-meta">
+          Built with Vite &amp; TypeScript ·
+          <a href="https://github.com/ToTuanAn/rhm-agent-website">Source</a>
+        </p>
+      </div>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="Enlarged figure">
+      <img alt="" id="lightbox-img" />
+    </dialog>
+  </body>
+</html>
