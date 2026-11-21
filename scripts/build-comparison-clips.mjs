@@ -28,7 +28,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const DATASET = join(ROOT, "data", "qualitative-comparison.json");
+const DATASET = join(ROOT, "src", "assets", "qualitative-comparison.json");
 const DATA_ROOT = join(ROOT, "data");
 const DEFAULT_SOURCE = "quant";
 const OUT_ROOT = join(ROOT, "public", "videos");

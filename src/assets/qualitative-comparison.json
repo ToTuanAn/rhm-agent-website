@@ -1,0 +1,467 @@
+{
+  "note": "Four HMBench-2K queries: the 03 Marine query is retained, along with driving, industrial, and medical examples. Frame ids index the fps=1 frame dump of each clip (0-based, in sorted filename order); VideoAgent reports 1-based ids, hence frame_base. Dumps are read from data/<frame_source>/<video_id>/ — data/quant by default, data/marine for the Marine example. Run `npm run frames` to export the referenced stills into public/frames/<video_id>/<index>.jpg, and `npm run clips` to cut one clip per example into public/videos/<video_id>.mp4 — from the example's clip_frame_range dump files when set, else its reference window, and the whole dump when neither is set.",
+  "examples": [
+    {
+      "id": "hm_marine__000099",
+      "benchmark": "HMBench · Marine",
+      "video_id": "marine__d20f45b8e53041f1a5f9b22459bc61f7",
+      "frame_source": "marine",
+      "video": "videos/marine__d20f45b8e53041f1a5f9b22459bc61f7.mp4",
+      "clip_width": 480,
+      "clip_frame_range": ["000705", "000753"],
+      "question": "After the diver submerges and uses the metal detector, what does he retrieve from the seabed?",
+      "options": [
+        {
+          "label": "A",
+          "text": "A yellow tag"
+        },
+        {
+          "label": "B",
+          "text": "Shells and debris"
+        },
+        {
+          "label": "C",
+          "text": "A blue bottle"
+        },
+        {
+          "label": "D",
+          "text": "A green label"
+        }
+      ],
+      "groundtruth": "B",
+      "methods": [
+        {
+          "id": "videoagent",
+          "name": "VideoAgent",
+          "answer": "C",
+          "frames": [
+            1,
+            231,
+            372,
+            461,
+            482,
+            691,
+            779,
+            921
+          ],
+          "frame_base": 1
+        },
+        {
+          "id": "qwen",
+          "name": "Qwen3VL-8B",
+          "answer": "A",
+          "frames": [
+            629,
+            677,
+            78,
+            726,
+            84,
+            72,
+            48,
+            141,
+            263,
+            284,
+            326,
+            411,
+            0,
+            150,
+            132,
+            169
+          ],
+          "frame_base": 0
+        },
+        {
+          "id": "vca",
+          "name": "VCA",
+          "answer": "C",
+          "frames": [
+            0,
+            61,
+            122,
+            184,
+            245,
+            306,
+            368,
+            429,
+            490,
+            552,
+            613,
+            674,
+            736,
+            797,
+            858,
+            920
+          ],
+          "frame_base": 0
+        },
+        {
+          "id": "ours",
+          "name": "RHM-Agent (ours)",
+          "answer": "B",
+          "frames": [
+            242,
+            629,
+            581,
+            484,
+            774,
+            435,
+            387,
+            920,
+            532,
+            823,
+            193,
+            726,
+            96,
+            0,
+            677
+          ],
+          "frame_base": 0
+        }
+      ]
+    },
+    {
+      "id": "hm_driving__000039",
+      "benchmark": "HMBench · Driving",
+      "question": "After the vehicle registers the presence of people nearby, what is the pedestrian's awareness regarding vehicle?",
+      "time_reference": "00:38-00:40",
+      "video_id": "driving__f8d1436ff17e41a9a325b1fb2abdfc18",
+      "options": [
+        {
+          "label": "A",
+          "text": "Cannot be determined"
+        },
+        {
+          "label": "B",
+          "text": "Notices the vehicle"
+        },
+        {
+          "label": "C",
+          "text": "Unaware of the vehicle"
+        }
+      ],
+      "groundtruth": "B",
+      "video": "videos/driving__f8d1436ff17e41a9a325b1fb2abdfc18.mp4",
+      "methods": [
+        {
+          "id": "videoagent",
+          "frame_base": 1,
+          "name": "VideoAgent",
+          "answer": "A",
+          "frames": [
+            1,
+            11,
+            21,
+            25,
+            30,
+            31,
+            42
+          ]
+        },
+        {
+          "id": "qwen",
+          "name": "Qwen3VL-8B",
+          "answer": "A",
+          "frames": [
+            23,
+            25,
+            10,
+            29,
+            8,
+            21,
+            27,
+            14,
+            33,
+            37,
+            35,
+            31,
+            2,
+            40,
+            4
+          ]
+        },
+        {
+          "id": "vca",
+          "name": "VCA",
+          "answer": "C",
+          "frames": [
+            0,
+            2,
+            5,
+            8,
+            10,
+            13,
+            16,
+            18,
+            21,
+            24,
+            26,
+            29,
+            32,
+            34,
+            37,
+            40
+          ]
+        },
+        {
+          "id": "ours",
+          "name": "RHM-Agent (ours)",
+          "answer": "B",
+          "frames": [
+            23,
+            25,
+            21,
+            27,
+            29,
+            10,
+            40,
+            8,
+            37,
+            14,
+            31,
+            33,
+            35,
+            18,
+            12
+          ]
+        }
+      ],
+      "clip_frame_range": [
+        "000290",
+        "000435"
+      ]
+    },
+    {
+      "id": "hm_industry__000167",
+      "benchmark": "HMBench · Industrial",
+      "question": "What’s the next step after I spin the wheel?",
+      "time_reference": "03:11-05:38",
+      "video_id": "industrial__109bdc649c79405a948f44f7ff69f125",
+      "options": [
+        {
+          "label": "A",
+          "text": "Tighten the central hub bolt with the provided socket."
+        },
+        {
+          "label": "B",
+          "text": "Check the suspension linkage for proper clearance."
+        },
+        {
+          "label": "C",
+          "text": "Apply a thin layer of lubricant to the axle shaft."
+        },
+        {
+          "label": "D",
+          "text": "You need to attach the second wheel."
+        }
+      ],
+      "groundtruth": "D",
+      "video": "videos/industrial__109bdc649c79405a948f44f7ff69f125.mp4",
+      "methods": [
+        {
+          "id": "videoagent",
+          "frame_base": 1,
+          "name": "VideoAgent",
+          "answer": "A",
+          "frames": [
+            1,
+            99,
+            143,
+            149,
+            198,
+            232,
+            239,
+            297,
+            396
+          ]
+        },
+        {
+          "id": "qwen",
+          "name": "Qwen3VL-8B",
+          "answer": "A",
+          "frames": [
+            41,
+            353,
+            332,
+            228,
+            374,
+            199,
+            270,
+            311,
+            145,
+            152,
+            160,
+            176,
+            207,
+            191,
+            291,
+            183
+          ]
+        },
+        {
+          "id": "vca",
+          "name": "VCA",
+          "answer": "A",
+          "frames": [
+            0,
+            26,
+            52,
+            79,
+            105,
+            131,
+            158,
+            184,
+            210,
+            237,
+            263,
+            289,
+            316,
+            342,
+            368,
+            395
+          ]
+        },
+        {
+          "id": "ours",
+          "name": "RHM-Agent (ours)",
+          "answer": "D",
+          "frames": [
+            374,
+            353,
+            41,
+            332,
+            62,
+            311,
+            103,
+            291,
+            249,
+            20,
+            207,
+            83,
+            270,
+            124,
+            145
+          ]
+        }
+      ],
+      "clip_frame_range": [
+        "008100",
+        "009960"
+      ]
+    },
+    {
+      "id": "hm_medical__000152",
+      "benchmark": "HMBench · Medical",
+      "question": "At 27:23-28:23 of the procedure, what is the current surgical phase?",
+      "time_reference": "27:23-28:23",
+      "video_id": "medical__d92dbef1fb9c4c6b84ee780940ff1b17",
+      "options": [
+        {
+          "label": "A",
+          "text": "Anastomosis Test"
+        },
+        {
+          "label": "B",
+          "text": "Gastrojejunal Anastomosis"
+        },
+        {
+          "label": "C",
+          "text": "Disassembling"
+        },
+        {
+          "label": "D",
+          "text": "Mesenteric Defect Closure"
+        }
+      ],
+      "groundtruth": "B",
+      "video": "videos/medical__d92dbef1fb9c4c6b84ee780940ff1b17.mp4",
+      "methods": [
+        {
+          "id": "videoagent",
+          "frame_base": 1,
+          "name": "VideoAgent",
+          "answer": "D",
+          "frames": [
+            1,
+            1009,
+            1114,
+            1503,
+            1540,
+            1607,
+            1985,
+            2018,
+            2785,
+            3027,
+            4036
+          ]
+        },
+        {
+          "id": "qwen",
+          "name": "Qwen3VL-8B",
+          "answer": "A",
+          "frames": [
+            1486,
+            1698,
+            2123,
+            2973,
+            1911,
+            3185,
+            2336,
+            1274,
+            1061,
+            3397,
+            2548,
+            3610,
+            637,
+            424,
+            2760
+          ]
+        },
+        {
+          "id": "vca",
+          "name": "VCA",
+          "answer": "D",
+          "frames": [
+            0,
+            269,
+            538,
+            807,
+            1076,
+            1345,
+            1614,
+            1883,
+            2152,
+            2421,
+            2690,
+            2959,
+            3228,
+            3497,
+            3766,
+            4035
+          ]
+        },
+        {
+          "id": "ours",
+          "name": "RHM-Agent (ours)",
+          "answer": "B",
+          "frames": [
+            637,
+            2123,
+            2336,
+            2548,
+            1486,
+            424,
+            1274,
+            3610,
+            3397,
+            1698,
+            3185,
+            2973,
+            2760,
+            1061,
+            1911
+          ]
+        }
+      ]
+    }
+  ]
+}

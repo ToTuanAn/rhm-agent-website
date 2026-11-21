@@ -1,4 +1,4 @@
-import datasetUrl from "../data/correct_examples.json?url";
+import datasetUrl from "./assets/correct_examples.json?url";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 

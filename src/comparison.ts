@@ -1,4 +1,4 @@
-import dataUrl from "../data/qualitative-comparison.json?url";
+import dataUrl from "./assets/qualitative-comparison.json?url";
 
 /**
  * `npm run frames` exports stills to public/frames/<video_id>/<index>.jpg and
@@ -106,7 +106,7 @@ async function load(ui: CmpUi): Promise<void> {
     ui.noteEl.textContent = `Below is the ground-truth video segment extracted from the longer video.`;
   } catch {
     ui.noteEl.textContent =
-      "Could not load data/qualitative-comparison.json — run the page through Vite.";
+      "Could not load the qualitative comparison dataset — run the page through Vite.";
   }
 }
 

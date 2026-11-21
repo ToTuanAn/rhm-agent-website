@@ -1,5 +1,5 @@
 /**
- * Exports the stills referenced by data/qualitative-comparison.json into
+ * Exports the stills referenced by src/assets/qualitative-comparison.json into
  * public/frames/<video_id>/<index>.jpg so the comparison section can load them
  * with a predictable URL.
  *
@@ -17,7 +17,7 @@ import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const DATASET = join(ROOT, "data", "qualitative-comparison.json");
+const DATASET = join(ROOT, "src", "assets", "qualitative-comparison.json");
 const DATA_ROOT = join(ROOT, "data");
 const DEFAULT_SOURCE = "quant";
 const OUT_ROOT = join(ROOT, "public", "frames");
