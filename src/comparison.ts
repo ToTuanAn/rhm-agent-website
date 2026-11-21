@@ -143,10 +143,9 @@ function renderExample(ui: CmpUi, example: Comparison): void {
   ui.sourceEl.textContent = example.benchmark;
   ui.questionEl.textContent = example.question;
   const clipLabel = frameRangeLabel(example.clipFrameRange);
-  ui.timeEl.textContent = example.timeReference
-    ? ``
-    : "";
-  ui.timeEl.hidden = !example.timeReference;
+  const meta = [clipLabel ? `Frames ${clipLabel}` : "", example.timeReference ?? ""].filter(Boolean).join(" · ");
+  ui.timeEl.textContent = meta;
+  ui.timeEl.hidden = meta === "";
   mountVideo(ui.videoEl, example);
   renderOptions(ui.optionsEl, example);
   renderAnswers(ui.answersEl, example);
