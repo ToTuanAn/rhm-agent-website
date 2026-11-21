@@ -51,12 +51,12 @@
         </a>
 
         <nav class="nav" aria-label="Section navigation">
-          <a href="#video">Overview</a>
+          <!-- <a href="#video">Overview</a>
           <a href="#teaser">Background</a>
-          <a href="#method">Method</a>
+          <a href="#method">Method</a> -->
           <a href="#results">Results</a>
-          <a href="#demo">Demo</a>
-          <a href="#citation">Cite</a>
+          <a href="#comparison">Compare</a>
+          <!-- <a href="#citation">Cite</a> -->
         </nav>
 
         <div class="header-actions">
@@ -110,12 +110,13 @@
               </span>
             </li>
             <li>
-              <a class="btn btn-primary" href="#video">
+              <!-- Temporarily disabled: the Overview / summary video section is hidden. -->
+              <span class="btn is-soon" aria-disabled="true">
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
                 </svg>
-                Watch the summary
-              </a>
+                Watch the summary <em class="soon">Coming soon</em>
+              </span>
             </li>
             <li>
               <span class="btn is-soon" aria-disabled="true">
@@ -154,6 +155,8 @@
             </li>
           </ul>
 
+<!-- TEMPORARILY HIDDEN: Abstract. Re-enable by removing this comment wrapper. -->
+<!--
           <div class="abstract">
             <h2>Abstract</h2>
             <p>
@@ -181,9 +184,12 @@
               memory-augmented agents.
             </p>
           </div>
+-->
         </div>
       </section>
 
+<!-- TEMPORARILY HIDDEN: Overview / paper summary video. Re-enable by removing this comment wrapper. -->
+<!--
       <section class="section" id="video">
         <div class="wrap">
           <header class="section-head">
@@ -213,7 +219,10 @@
           </figure>
         </div>
       </section>
+-->
 
+<!-- TEMPORARILY HIDDEN: Background (teaser). Re-enable by removing this comment wrapper. -->
+<!--
       <section class="section" id="teaser">
         <div class="wrap">
           <header class="section-head">
@@ -243,7 +252,10 @@
           </figure>
         </div>
       </section>
+-->
 
+<!-- TEMPORARILY HIDDEN: Method. Re-enable by removing this comment wrapper. -->
+<!--
       <section class="section" id="method">
         <div class="wrap">
           <header class="section-head">
@@ -289,269 +301,247 @@
             </article>
           </div>
 
-          <figure class="figure-card">
-            <button class="figure-zoom" type="button" aria-label="Enlarge the framework figure">
-              <img
-                src="%BASE_URL%figures/method.png"
-                alt="Framework overview. Left: the hierarchical memory bank over two iterations, with a maximum depth of four. Right: the RHM-Agent pipeline with N-node selection, L-times expansion over three nodes, and per-node expand, exploit, or answer decisions."
-                width="2494"
-                height="1110"
-                loading="lazy"
-              />
-            </button>
-            <figcaption>
-              <strong>Figure 2.</strong> The RHM framework. The memory bank (left) is refined
-              iteration by iteration, while the agentic reasoning loop (right) selects <em>N</em>
-              promising nodes, explores each of them for <em>L</em> steps, and decides per node
-              whether to expand, exploit, or terminate with an answer.
-            </figcaption>
-          </figure>
+          <figure
+            class="figure-card figure-slider"
+            id="framework-figures"
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="Figure 2: the RHM framework, and Figure 3: local and global tree rewards"
+          >
+            <div class="figure-slider-viewport">
+              <div class="figure-slider-track">
+                <div
+                  class="figure-slide is-active"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="Figure 2, first of two figures"
+                >
+                  <button
+                    class="figure-zoom"
+                    type="button"
+                    aria-label="Enlarge the framework figure"
+                  >
+                    <img
+                      src="%BASE_URL%figures/method.png"
+                      alt="Framework overview. Left: the hierarchical memory bank over two iterations, with a maximum depth of four. Right: the RHM-Agent pipeline with N-node selection, L-times expansion over three nodes, and per-node expand, exploit, or answer decisions."
+                      width="2494"
+                      height="1110"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </button>
+                  <p class="figure-caption">
+                    <strong>Figure 2.</strong> The RHM framework. The memory bank (left) is refined
+                    iteration by iteration, while the agentic reasoning loop (right) selects
+                    <em>N</em> promising nodes, explores each of them for <em>L</em> steps, and
+                    decides per node whether to expand, exploit, or terminate with an answer.
+                  </p>
+                </div>
 
-          <figure class="figure-card">
-            <button class="figure-zoom" type="button" aria-label="Enlarge the reward figure">
-              <img
-                src="%BASE_URL%figures/reward.png"
-                alt="Hierarchical reward mechanism. Local-tree rewards are assigned by bottom-up aggregation over leaf answers, global-tree rewards assign the root answer equally across nodes, and the summed advantage optimises the VLM policy via GRPO."
-                width="1753"
-                height="1650"
-                loading="lazy"
-              />
-            </button>
-            <figcaption>
-              <strong>Figure 3.</strong> Local and global tree rewards. Terminal-only supervision
-              discards trajectories that fail at the last step, so leaf answers are credited
-              bottom-up along their path; the root answer contributes an unconditioned global term,
-              and both are combined to optimise the VLM policy via GRPO.
-            </figcaption>
+                <div
+                  class="figure-slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="Figure 3, second of two figures"
+                  aria-hidden="true"
+                >
+                  <button
+                    class="figure-zoom"
+                    type="button"
+                    aria-label="Enlarge the reward figure"
+                    tabindex="-1"
+                  >
+                    <img
+                      src="%BASE_URL%figures/reward.png"
+                      alt="Hierarchical reward mechanism. Local-tree rewards are assigned by bottom-up aggregation over leaf answers, global-tree rewards assign the root answer equally across nodes, and the summed advantage optimises the VLM policy via GRPO."
+                      width="1753"
+                      height="1650"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </button>
+                  <p class="figure-caption">
+                    <strong>Figure 3.</strong> Local and global tree rewards. Terminal-only
+                    supervision discards trajectories that fail at the last step, so leaf answers
+                    are credited bottom-up along their path; the root answer contributes an
+                    unconditioned global term, and both are combined to optimise the VLM policy via
+                    GRPO.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="figure-slider-bar">
+              <button
+                class="figure-slider-btn"
+                type="button"
+                data-dir="-1"
+                aria-label="Show Figure 2"
+                disabled
+              >
+                <span aria-hidden="true">‹</span>
+              </button>
+              <div class="figure-slider-dots">
+                <button
+                  class="figure-slider-dot"
+                  type="button"
+                  aria-label="Show Figure 2"
+                  aria-current="true"
+                ></button>
+                <button
+                  class="figure-slider-dot"
+                  type="button"
+                  aria-label="Show Figure 3"
+                ></button>
+              </div>
+              <p class="figure-slider-hint" aria-hidden="true">Drag or swipe</p>
+              <button
+                class="figure-slider-btn"
+                type="button"
+                data-dir="1"
+                aria-label="Show Figure 3"
+              >
+                <span aria-hidden="true">›</span>
+              </button>
+            </div>
           </figure>
         </div>
       </section>
+-->
 
       <section class="section" id="results">
         <div class="wrap">
           <header class="section-head">
             <p class="kicker">Results</p>
-            <h2>Stronger over long horizons</h2>
-            <p class="lede">
-              An 8B RHM-Agent with a 16-frame budget beats 8B baselines using twice the frames and
-              32B models using four times the parameters. Because the memory is structured rather
-              than enlarged, the gain survives on egocentric video as well.
-            </p>
+            <h2>The memory tree behind each answer</h2>
           </header>
+          <div class="memviz" id="memory-viz">
+            <div class="memviz-tabs" role="group" aria-label="Benchmark">
+              <button
+                class="memviz-tab is-active"
+                type="button"
+                data-source="lvbench"
+                aria-pressed="true"
+              >
+                LVBench
+              </button>
+              <button class="memviz-tab" type="button" data-source="egoschema" aria-pressed="false">
+                EgoSchema
+              </button>
+              <button class="memviz-tab" type="button" data-source="ego4d" aria-pressed="false">
+                Ego4D
+              </button>
+              <button class="memviz-tab" type="button" data-source="hmbench" aria-pressed="false">
+                HMBench
+              </button>
+            </div>
 
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-value">+9.00</span>
-              <span class="stat-label">HMBench-2K average over the same 8B backbone</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">+6.63</span>
-              <span class="stat-label">LVBench average with half the frames</span>
-            </div>
-            <div class="stat">
-              <span class="stat-value">+5.60</span>
-              <span class="stat-label">Ego4D over a 4&times; larger model</span>
+            <p class="memviz-note" id="memviz-note" role="status">Loading the released traces&hellip;</p>
+
+            <div class="memviz-grid">
+              <div class="memviz-main">
+                <div class="memviz-examples" id="memviz-chips" aria-label="Example queries"></div>
+
+                <div class="memviz-toolbar">
+                  <span class="memviz-toolbar-title">Memory tree</span>
+                  <div class="memviz-toolset">
+                    <button
+                      class="btn btn-small btn-ghost"
+                      id="memviz-topk-toggle"
+                      type="button"
+                      aria-pressed="false"
+                    >
+                      Final-K only
+                    </button>
+                    <div class="memviz-zoom" role="group" aria-label="Zoom">
+                      <button
+                        class="btn btn-small btn-ghost"
+                        id="memviz-zoom-out"
+                        type="button"
+                        aria-label="Zoom out"
+                      >
+                        &minus;
+                      </button>
+                      <span class="memviz-zoom-level" id="memviz-zoom-level">100%</span>
+                      <button
+                        class="btn btn-small btn-ghost"
+                        id="memviz-zoom-in"
+                        type="button"
+                        aria-label="Zoom in"
+                      >
+                        +
+                      </button>
+                      <button class="btn btn-small btn-ghost" id="memviz-zoom-fit" type="button">
+                        Fit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="memviz-viewport" id="memviz-viewport">
+                  <p class="memviz-empty">Loading traces&hellip;</p>
+                </div>
+
+                <div class="memviz-inspector" id="memviz-inspector">
+                  <p class="memviz-empty">Select a node to read its response.</p>
+                </div>
+              </div>
+
+              <aside
+                class="memviz-panel"
+                id="memviz-panel"
+                aria-label="Question, video and answers"
+              ></aside>
             </div>
           </div>
-
-          <div class="table-wrap">
-            <table>
-              <caption>
-                Table 1. Long-form and egocentric VideoQA. LVBench reports the average over its six
-                task types; accuracy is averaged over 500 sampled test questions per benchmark.
-                Best in bold.
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Model</th>
-                  <th scope="col">Params</th>
-                  <th scope="col">Frames</th>
-                  <th scope="col">LVBench</th>
-                  <th scope="col">EgoSchema</th>
-                  <th scope="col">Ego4D</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Video-LLaVA</th>
-                  <td>7B</td>
-                  <td>16</td>
-                  <td>23.75</td>
-                  <td>17.60</td>
-                  <td>24.40</td>
-                </tr>
-                <tr>
-                  <th scope="row">Video-LLaMA3</th>
-                  <td>7B</td>
-                  <td>32</td>
-                  <td>35.32</td>
-                  <td>52.50</td>
-                  <td>40.00</td>
-                </tr>
-                <tr>
-                  <th scope="row">InternVL3</th>
-                  <td>8B</td>
-                  <td>32</td>
-                  <td>37.66</td>
-                  <td>70.40</td>
-                  <td>46.60</td>
-                </tr>
-                <tr>
-                  <th scope="row">InternVL3</th>
-                  <td>38B</td>
-                  <td>16</td>
-                  <td>40.73</td>
-                  <td>72.20</td>
-                  <td>50.80</td>
-                </tr>
-                <tr>
-                  <th scope="row">Qwen3-VL</th>
-                  <td>8B</td>
-                  <td>32</td>
-                  <td>35.95</td>
-                  <td>71.20</td>
-                  <td>51.00</td>
-                </tr>
-                <tr>
-                  <th scope="row">Qwen3-VL</th>
-                  <td>32B</td>
-                  <td>16</td>
-                  <td>37.07</td>
-                  <td>72.60</td>
-                  <td>53.40</td>
-                </tr>
-                <tr class="highlight">
-                  <th scope="row">RHM-Agent (ours)</th>
-                  <td>8B</td>
-                  <td>16</td>
-                  <td><strong>42.58</strong></td>
-                  <td><strong>73.20</strong></td>
-                  <td><strong>56.60</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <caption>
-                Table 2. HMBench-2K, averaged per domain. Every entry uses a 16-frame budget unless
-                stated otherwise; RHM-Agent is fine-tuned on Qwen3-VL-8B, which it improves in every
-                domain except medical, where the proprietary backbones carry more clinical knowledge.
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Model</th>
-                  <th scope="col">Params</th>
-                  <th scope="col">Marine</th>
-                  <th scope="col">Medical</th>
-                  <th scope="col">Industrial</th>
-                  <th scope="col">Driving</th>
-                  <th scope="col">Average</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Qwen3-VL</th>
-                  <td>8B</td>
-                  <td>62.40</td>
-                  <td>20.60</td>
-                  <td>55.80</td>
-                  <td>60.80</td>
-                  <td>49.90</td>
-                </tr>
-                <tr>
-                  <th scope="row">Qwen3-VL</th>
-                  <td>32B</td>
-                  <td>62.80</td>
-                  <td>22.60</td>
-                  <td>69.80</td>
-                  <td>60.80</td>
-                  <td>54.00</td>
-                </tr>
-                <tr>
-                  <th scope="row">InternVL3</th>
-                  <td>38B</td>
-                  <td>64.00</td>
-                  <td>28.80</td>
-                  <td>66.60</td>
-                  <td>66.00</td>
-                  <td>56.35</td>
-                </tr>
-                <tr>
-                  <th scope="row">GPT-5-mini</th>
-                  <td>&mdash;</td>
-                  <td>58.40</td>
-                  <td>25.60</td>
-                  <td>60.20</td>
-                  <td>72.80</td>
-                  <td>54.25</td>
-                </tr>
-                <tr>
-                  <th scope="row">Gemini-3.1-Flash-Lite</th>
-                  <td>&mdash;</td>
-                  <td>60.60</td>
-                  <td><strong>28.00</strong></td>
-                  <td>68.20</td>
-                  <td>70.80</td>
-                  <td>56.90</td>
-                </tr>
-                <tr>
-                  <th scope="row">VideoTree</th>
-                  <td>&mdash;</td>
-                  <td>62.80</td>
-                  <td>26.00</td>
-                  <td>64.00</td>
-                  <td>65.00</td>
-                  <td>54.45</td>
-                </tr>
-                <tr class="highlight">
-                  <th scope="row">RHM-Agent (ours)</th>
-                  <td>8B</td>
-                  <td><strong>65.80</strong></td>
-                  <td>24.00</td>
-                  <td><strong>69.40</strong></td>
-                  <td><strong>76.40</strong></td>
-                  <td><strong>58.90</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <p class="lede">
-            Against dynamic memory agents the gap widens: +12.30% average accuracy over VideoAgent
-            and +7.15% over VCA on HMBench-2K, with higher node precision (+0.29% over VideoAgent,
-            +0.59% over VCA) and better frame brevity than VCA. Memory depth helps only where the
-            videos are long enough to need it — deeper trees help the 8B model on Ego4D up to depth
-            five, but hurt smaller models on the much shorter EgoSchema clips.
-          </p>
         </div>
       </section>
 
-      <section class="section" id="demo">
+      <section class="section" id="comparison">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Qualitative trace</p>
-            <h2>Following one query through the tree</h2>
+            <p class="kicker">Qualitative comparison</p>
+            <h2>Queries that RHM-Agent answers correctly</h2>
             <p class="lede">
-              The marine example from the paper: “After the diver retrieves a small metallic object
-              from the seabed, what does the diver do next?” A linear buffer never reaches the
-              retrieval moment; the hierarchy expands straight toward it and prunes the rest.
+              Same videos, same questions, same answer options, the only difference is which frames
+              each method keeps. VideoAgent, VCA and the Qwen3-VL-8B backbone each commit to a
+              wrong option; the RHM-Agent hierarchy helps answer correctly.
             </p>
           </header>
 
-          <div class="demo">
-            <div class="demo-controls">
-              <button class="btn btn-primary" id="demo-run" type="button">Run example</button>
-              <button class="btn btn-ghost" id="demo-reset" type="button">Reset</button>
-              <p class="demo-status" id="demo-status" role="status">Idle — 8 steps queued.</p>
+          <div class="cmp" id="qualitative-comparison">
+            <div
+              class="cmp-tabs"
+              id="cmp-tabs"
+              role="group"
+              aria-label="Example queries"
+            ></div>
+            <p class="cmp-note" id="cmp-note" role="status">
+              Loading the released predictions&hellip;
+            </p>
+
+            <div class="cmp-grid">
+              <div class="cmp-media">
+                <figure class="cmp-video" id="cmp-video"></figure>
+                <div class="cmp-query">
+                  <p class="cmp-label">
+                    Question <span class="cmp-source" id="cmp-source"></span>
+                  </p>
+                  <p class="cmp-question" id="cmp-question"></p>
+                  <ul class="cmp-options" id="cmp-options"></ul>
+                </div>
+                <p class="cmp-time" id="cmp-time"></p>
+              </div>
+
+              <aside class="cmp-answers" id="cmp-answers" aria-label="Answers by method"></aside>
             </div>
-            <ol class="demo-trace" id="demo-trace" aria-live="polite"></ol>
+
+            <div class="cmp-strips" id="cmp-strips"></div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="citation">
+      <!-- <section class="section" id="citation">
         <div class="wrap narrow">
           <header class="section-head">
             <p class="kicker">Citation</p>
@@ -567,7 +557,7 @@
 }</code></pre>
           </div>
         </div>
-      </section>
+      </section> -->
     </main>
 
     <footer class="site-footer">

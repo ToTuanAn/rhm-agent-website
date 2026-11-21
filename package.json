@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.node.json",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "frames": "node scripts/build-comparison-frames.mjs",
+    "clips": "node scripts/build-comparison-clips.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
