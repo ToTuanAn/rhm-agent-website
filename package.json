@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "frames": "node scripts/build-comparison-frames.mjs",
+    "frames:results": "node scripts/build-results-frames.mjs",
     "clips": "node scripts/build-comparison-clips.mjs"
   },
   "devDependencies": {

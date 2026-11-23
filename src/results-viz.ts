@@ -1,5 +1,10 @@
 import datasetUrl from "./assets/correct_examples.json?url";
 
+/**
+ * `npm run frames:results` exports stills to public/frames/<video_id>/<image_id>.jpg,
+ * where image_id indexes the sorted image listing of data/output_folder/<video_id>/.
+ */
+const ASSET_BASE = import.meta.env.BASE_URL;
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 /** Cards per benchmark tab. Every tab has ten verified-correct traces, so the pad stays dormant. */
@@ -12,11 +17,19 @@ const ROW_GAP = 12;
 const COL_W = CARD_W + COL_GAP;
 const ROW_H = CARD_H + ROW_GAP;
 
-const SOURCE_META: Record<string, { label: string; match: (source: string) => boolean }> = {
+const SOURCE_META: Record<
+  string,
+  { label: string; match: (source: string) => boolean; mix?: string[] }
+> = {
   lvbench: { label: "LVBench", match: (source) => source === "lvbench_test" },
   egoschema: { label: "EgoSchema", match: (source) => source === "egoschema" },
   ego4d: { label: "Ego4D", match: (source) => source === "ego4d_test" },
-  hmbench: { label: "HMBench", match: (source) => source.startsWith("hm_") },
+  hmbench: {
+    label: "HMBench",
+    match: (source) => source.startsWith("hm_"),
+    // HMBench ships four domains; sample all of them instead of filling the tab from one.
+    mix: ["hm_marine", "hm_industry", "hm_driving", "hm_medical"],
+  },
 };
 
 interface TreeNode {
@@ -33,6 +46,7 @@ interface Example {
   idx: string;
   question: string;
   source: string;
+  videoId: string;
   groundtruth: string;
   finalK: number[];
   modelAnswer: string;
@@ -231,20 +245,32 @@ export function initResultsViz(): void {
     const pick = Math.min(selected.get(index) ?? 0, list.length - 1);
     selected.set(index, pick);
     renderChips(list, pick);
-    updateNote(index);
+    updateNote(index, list);
     const example = list[pick];
     if (example) renderExample(example);
   }
 
-  function updateNote(index: number): void {
+  function updateNote(index: number, list: Example[]): void {
     const key = tabs[index]?.dataset.source ?? "";
     const meta = SOURCE_META[key];
     const label = meta?.label ?? "benchmark";
     const own = meta ? all.filter((item) => meta.match(item.source)).length : 0;
-    const reuse =
+    let reuse =
       own >= EXAMPLES_PER_TAB
-        ? `${EXAMPLES_PER_TAB} verified-correct ${label} traces from the released sample.`
+        ? `${list.length} verified-correct ${label} traces from the released sample.`
         : `${own} verified-correct ${label} trace${own === 1 ? "" : "s"} in the released sample; the remaining cards replay traces from other benchmarks.`;
+
+    if (meta?.mix) {
+      const counts = new Map<string, number>();
+      for (const example of list) counts.set(example.source, (counts.get(example.source) ?? 0) + 1);
+      const parts = meta.mix
+        .filter((source) => counts.has(source))
+        .map((source) => `${domainLabel(source)} (${counts.get(source)})`);
+      if (parts.length > 1) {
+        reuse = `${list.length} verified-correct ${label} traces from the released sample, mixed across ${parts.join(", ")}.`;
+      }
+    }
+
     noteEl.textContent = `${reuse} Final-K frames are outlined in gold, click any node to read its policy response.`;
   }
 
@@ -411,7 +437,7 @@ export function initResultsViz(): void {
     const rank = topk.get(node.imageId);
     if (rank) card.classList.add("is-topk");
 
-    const thumb = createThumb(node.imageId);
+    const thumb = createThumb(node.imageId, example.videoId);
     if (rank) thumb.append(el("span", "mn-thumb-rank", `K${rank}`));
 
     const body = el("span", "mn-body");
@@ -431,12 +457,21 @@ export function initResultsViz(): void {
     return card;
   }
 
-  function createThumb(imageId: number): HTMLSpanElement {
+  function createThumb(imageId: number, videoId: string): HTMLSpanElement {
     const thumb = el("span", "mn-thumb");
     thumb.style.setProperty("--h", String(Math.round((imageId * 137.508) % 360)));
     thumb.style.setProperty("--sx", `${25 + ((imageId * 17) % 55)}%`);
     thumb.style.setProperty("--sy", `${20 + ((imageId * 29) % 50)}%`);
     thumb.setAttribute("aria-hidden", "true");
+    if (videoId) {
+      const img = el("img", "mn-thumb-img");
+      img.src = `${ASSET_BASE}frames/${videoId}/${imageId}.jpg`;
+      img.alt = "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.addEventListener("error", () => img.remove(), { once: true });
+      thumb.append(img);
+    }
     thumb.append(el("span", "mn-thumb-id", `#${imageId}`));
     return thumb;
   }
@@ -474,7 +509,7 @@ export function initResultsViz(): void {
     if (node.imageId === -1) {
       head.append(el("span", "mn-root-mark mi-root-mark", "◈"));
     } else {
-      const thumb = createThumb(node.imageId);
+      const thumb = createThumb(node.imageId, view?.example.videoId ?? "");
       thumb.classList.add("mi-thumb");
       head.append(thumb);
     }
@@ -615,6 +650,7 @@ function normalizeDataset(raw: unknown): Example[] {
           : `example-${index}`,
       question: typeof entry["question"] === "string" ? entry["question"] : "",
       source: typeof entry["data_source"] === "string" ? entry["data_source"] : "",
+      videoId: typeof entry["video_id"] === "string" ? entry["video_id"] : "",
       groundtruth:
         typeof entry["groundtruth_answer"] === "string" ? entry["groundtruth_answer"].trim() : "",
       finalK,
@@ -718,7 +754,7 @@ function extractAnswers(text: string): string[] {
 function examplesFor(key: string, all: Example[], tabIndex: number): Example[] {
   const meta = SOURCE_META[key];
   const own = meta ? all.filter((item) => meta.match(item.source)) : [];
-  const listed = own.slice(0, EXAMPLES_PER_TAB);
+  const listed = meta?.mix ? interleave(own, meta.mix) : own.slice(0, EXAMPLES_PER_TAB);
   let cursor = tabIndex;
 
   while (listed.length < EXAMPLES_PER_TAB && all.length > 0) {
@@ -727,6 +763,29 @@ function examplesFor(key: string, all: Example[], tabIndex: number): Example[] {
     if (candidate) listed.push(candidate);
   }
   return listed;
+}
+
+/** Round-robins one trace per domain so the first cards already show every HMBench subset. */
+function interleave(pool: Example[], order: string[]): Example[] {
+  const buckets = order.map((source) => pool.filter((item) => item.source === source));
+  const picked: Example[] = [];
+
+  for (let round = 0; picked.length < EXAMPLES_PER_TAB; round += 1) {
+    const before = picked.length;
+    for (const bucket of buckets) {
+      const next = bucket[round];
+      if (!next) continue;
+      picked.push(next);
+      if (picked.length === EXAMPLES_PER_TAB) break;
+    }
+    if (picked.length === before) break;
+  }
+
+  for (const example of pool) {
+    if (picked.length >= EXAMPLES_PER_TAB) break;
+    if (!picked.includes(example)) picked.push(example);
+  }
+  return picked;
 }
 
 function nodeKind(node: TreeNode): NodeKind {
@@ -797,9 +856,10 @@ function parseResponse(text: string): ResponsePart[] {
     const tag = (match[1] ?? "").toLowerCase();
     const kind: ResponsePart["kind"] =
       tag === "reason" || tag === "answer" || tag === "info" ? tag : "raw";
+    const body = (match[2] ?? "").trim();
     parts.push({
       label: kind === "raw" ? "Response" : kind[0]!.toUpperCase() + kind.slice(1),
-      text: (match[2] ?? "").trim(),
+      text: kind === "info" ? infoAction(body) : body,
       kind,
     });
     lastIndex = pattern.lastIndex;
@@ -809,6 +869,14 @@ function parseResponse(text: string): ResponsePart[] {
   if (tail) parts.push({ label: "Response", text: tail, kind: "raw" });
   if (parts.length === 0) parts.push({ label: "Response", text, kind: "raw" });
   return parts;
+}
+
+/** `expand_node("355")` / `prune_node("1307")` read as plain actions in the inspector. */
+const INFO_ACTION_RE = /^(expand|prune)_node\s*\([^)]*\)$/i;
+
+function infoAction(text: string): string {
+  const match = INFO_ACTION_RE.exec(collapse(text));
+  return match ? `${(match[1] ?? "").toLowerCase()} node` : text;
 }
 
 function answerCard(label: string, value: string, isModel: boolean): HTMLElement {
@@ -823,14 +891,16 @@ function chipLabel(example: Example): string {
 }
 
 function sourceLabel(source: string): string {
-  if (source.startsWith("hm_")) {
-    const domain = source.slice(3);
-    return `HMBench · ${domain.charAt(0).toUpperCase()}${domain.slice(1)}`;
-  }
+  if (source.startsWith("hm_")) return `HMBench · ${domainLabel(source)}`;
   if (source === "ego4d_test") return "Ego4D";
   if (source === "lvbench_test") return "LVBench";
   if (source === "egoschema") return "EgoSchema";
   return source;
+}
+
+function domainLabel(source: string): string {
+  const domain = source.startsWith("hm_") ? source.slice(3) : source;
+  return `${domain.charAt(0).toUpperCase()}${domain.slice(1)}`;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

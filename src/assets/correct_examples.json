@@ -236,7 +236,8 @@
    "ultimate_answer": "a",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "80f3dd0d-6ad9-4691-9de5-dc01a834bc0a"
   },
   {
    "question_idx": "ego4d_test__000131",
@@ -572,7 +573,8 @@
    "ultimate_answer": "a",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "c4333895-ed19-42fe-9323-271a41bdfe4c"
   },
   {
    "question_idx": "ego4d_test__000178",
@@ -831,7 +833,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "6b6d73b9-e92c-4698-86df-bbe687a9e95e"
   },
   {
    "question_idx": "ego4d_test__000208",
@@ -1124,7 +1127,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "182dffe9-d2bf-4a7d-b1d8-137470f0143d"
   },
   {
    "question_idx": "ego4d_test__000290",
@@ -1332,7 +1336,8 @@
    "ultimate_answer": "a",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "824e7896-904a-4ff5-b7ee-e21df21918c2"
   },
   {
    "question_idx": "ego4d_test__000355",
@@ -1557,7 +1562,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "216c7a1a-7ec3-4aa0-a465-e37e7b5fd2f3"
   },
   {
    "question_idx": "ego4d_test__000455",
@@ -1884,7 +1890,8 @@
    "ultimate_answer": "d",
    "predicted_option": "d",
    "groundtruth_option": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "863011c8-ebf7-4900-87d1-3c7930f95dab"
   },
   {
    "question_idx": "ego4d_test__000476",
@@ -2092,7 +2099,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "7c5eb718-99b2-48ac-bb1c-ef0158a6361b"
   },
   {
    "question_idx": "ego4d_test__000491",
@@ -2377,7 +2385,8 @@
    "ultimate_answer": "a",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "e98dd5f7-e90e-484e-b8ae-9a180882a26d"
   },
   {
    "question_idx": "ego4d_test__000496",
@@ -2670,7 +2679,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "8ff25fe1-3a42-4449-bd91-b3ac2adf9143"
   },
   {
    "question_idx": "lvbench_test__000071",
@@ -2895,7 +2905,8 @@
    "ultimate_answer": "C",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "evYm0cELO3I"
   },
   {
    "question_idx": "lvbench_test__000195",
@@ -3188,7 +3199,8 @@
    "ultimate_answer": "B",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "81SbCR6p3Z0"
   },
   {
    "question_idx": "lvbench_test__000274",
@@ -3396,7 +3408,8 @@
    "ultimate_answer": "(C) News conference",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "FaV0tIaWWEg"
   },
   {
    "question_idx": "lvbench_test__000339",
@@ -3630,7 +3643,8 @@
    "ultimate_answer": "C",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "1FsiZgGZU70"
   },
   {
    "question_idx": "lvbench_test__000341",
@@ -3853,7 +3867,8 @@
    "ultimate_answer": "(D) Tattoo",
    "predicted_option": "d",
    "groundtruth_option": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "1FsiZgGZU70"
   },
   {
    "question_idx": "lvbench_test__000342",
@@ -4042,7 +4057,8 @@
    "ultimate_answer": "C",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "1FsiZgGZU70"
   },
   {
    "question_idx": "lvbench_test__000344",
@@ -4233,7 +4249,8 @@
    "ultimate_answer": "A",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "1FsiZgGZU70"
   },
   {
    "question_idx": "lvbench_test__000382",
@@ -4423,7 +4440,8 @@
    "ultimate_answer": "C",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "Hf-n1yfd8II"
   },
   {
    "question_idx": "lvbench_test__000409",
@@ -4691,7 +4709,8 @@
    "ultimate_answer": "(C) 36 minutes",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "cXDT44zT8JY"
   },
   {
    "question_idx": "lvbench_test__000458",
@@ -4878,7 +4897,8 @@
    "ultimate_answer": "A",
    "predicted_option": "a",
    "groundtruth_option": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "4LA_tH-VSnQ"
   },
   {
    "question_idx": "egoschema__000071",
@@ -5069,7 +5089,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "223164c8-abed-4f1a-8f7c-4088c89d3ece"
   },
   {
    "question_idx": "egoschema__000080",
@@ -5277,7 +5298,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "249a0fc4-ccf4-4e6f-9ca5-29f11cf5e1ad"
   },
   {
    "question_idx": "egoschema__000114",
@@ -5466,7 +5488,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "38ebfa83-3667-43af-989e-6354440f9265"
   },
   {
    "question_idx": "egoschema__000146",
@@ -5785,7 +5808,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "47f4c828-f238-459f-91c3-6b221db54c5b"
   },
   {
    "question_idx": "egoschema__000258",
@@ -5976,7 +6000,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "84d775ff-e0ee-4072-b0ce-7d7cb04af615"
   },
   {
    "question_idx": "egoschema__000293",
@@ -6235,7 +6260,8 @@
    "ultimate_answer": "b",
    "predicted_option": "b",
    "groundtruth_option": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "960f4df3-e414-48ae-8f29-188ab5eeca0b"
   },
   {
    "question_idx": "egoschema__000344",
@@ -6426,7 +6452,8 @@
    "ultimate_answer": "d",
    "predicted_option": "d",
    "groundtruth_option": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "afbc1ef9-bc2b-49f9-9009-3d7486563764"
   },
   {
    "question_idx": "egoschema__000349",
@@ -6617,7 +6644,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "b3c34e88-65fb-442f-ad6c-57b3c31f7a98"
   },
   {
    "question_idx": "egoschema__000364",
@@ -6817,7 +6845,8 @@
    "ultimate_answer": "c",
    "predicted_option": "c",
    "groundtruth_option": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "b6859c2c-d9f4-4c45-8f23-b7c033242c86"
   },
   {
    "question_idx": "egoschema__000415",
@@ -7059,7 +7088,8 @@
    "ultimate_answer": "e",
    "predicted_option": "e",
    "groundtruth_option": "e",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "d30c1b6c-bbcb-490b-b104-c30b8cb985d3"
   },
   {
    "question_idx": "hm_marine__000072",
@@ -7291,7 +7321,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__fa77e7908a824d71b2f95280dcf2b811"
   },
   {
    "question_idx": "hm_marine__000139",
@@ -7650,7 +7681,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__baad9ca0c25d41d9b10468f3da782e3e"
   },
   {
    "question_idx": "hm_marine__000080",
@@ -7873,7 +7905,8 @@
     ]
    },
    "ultimate_answer": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__7f9cb0ce28b14510b01dc15c57ebeba6"
   },
   {
    "question_idx": "hm_marine__000105",
@@ -8130,7 +8163,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__13ef405dc96e4b76be33d4f027e1f4a5"
   },
   {
    "question_idx": "hm_marine__000357",
@@ -8471,7 +8505,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__2414f7b8261f439c9a4c4ab075ec4f8a"
   },
   {
    "question_idx": "hm_marine__000345",
@@ -8693,7 +8728,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__a83a966a7a124154a0567736bb220010"
   },
   {
    "question_idx": "hm_marine__000470",
@@ -8950,7 +8986,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__9872a5e2c5d24512a4a3547392701491"
   },
   {
    "question_idx": "hm_marine__000415",
@@ -9173,7 +9210,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__51feeebe8c23497f84c3e675cb853791"
   },
   {
    "question_idx": "hm_marine__000212",
@@ -9452,7 +9490,8 @@
     ]
    },
    "ultimate_answer": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__a1ed01853d234b09a397ea59841b672f"
   },
   {
    "question_idx": "hm_marine__000019",
@@ -9820,7 +9859,8 @@
     ]
    },
    "ultimate_answer": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "marine__af9b56152b234dccaaf8d7b34882dad3"
   },
   {
    "question_idx": "hm_medical__000379",
@@ -10103,7 +10143,8 @@
     ]
    },
    "ultimate_answer": "B",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__7d2f0f7da9664a349913ab7462b8a29e"
   },
   {
    "question_idx": "hm_medical__000242",
@@ -10292,7 +10333,8 @@
     ]
    },
    "ultimate_answer": "B",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__b209f7cd1cf1494b9d165a82061ab5f1"
   },
   {
    "question_idx": "hm_medical__000022",
@@ -10549,7 +10591,8 @@
     ]
    },
    "ultimate_answer": "(D) Anastomosis Leak Test",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__d172fed4b94d42b988aed2eebe8abe4a"
   },
   {
    "question_idx": "hm_medical__000334",
@@ -10806,7 +10849,8 @@
     ]
    },
    "ultimate_answer": "C",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__186b2ca460dc40328d9c1dc240724d57"
   },
   {
    "question_idx": "hm_medical__000446",
@@ -11029,7 +11073,8 @@
     ]
    },
    "ultimate_answer": "D",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__57903040131542cc91ca128fc31f302c"
   },
   {
    "question_idx": "hm_medical__000284",
@@ -11380,7 +11425,8 @@
     ]
    },
    "ultimate_answer": "C",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__838f181283324e3bbca66a65d5ca3a84"
   },
   {
    "question_idx": "hm_medical__000241",
@@ -11654,7 +11700,8 @@
     ]
    },
    "ultimate_answer": "C",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__5c744818c8a24b58a77d6533bb0b3dbf"
   },
   {
    "question_idx": "hm_medical__000332",
@@ -11928,7 +11975,8 @@
     ]
    },
    "ultimate_answer": "B",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__3f94d99ae83649d4964e8ca726fed7e0"
   },
   {
    "question_idx": "hm_medical__000345",
@@ -12236,7 +12284,8 @@
     ]
    },
    "ultimate_answer": "B",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__14d45703dde04c83a412bdf405a6516a"
   },
   {
    "question_idx": "hm_medical__000344",
@@ -12510,7 +12559,8 @@
     ]
    },
    "ultimate_answer": "C",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "medical__14d45703dde04c83a412bdf405a6516a"
   },
   {
    "question_idx": "hm_driving__000228",
@@ -12733,7 +12783,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__36aa369ab653407b8cc704cc75f659d1"
   },
   {
    "question_idx": "hm_driving__000438",
@@ -13016,7 +13067,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__3dbe636df9254d69953a2fbe518a188a"
   },
   {
    "question_idx": "hm_driving__000360",
@@ -13256,7 +13308,8 @@
     ]
    },
    "ultimate_answer": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__e9d590852b324b6fb627c537924a63f0"
   },
   {
    "question_idx": "hm_driving__000497",
@@ -13590,7 +13643,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__91a7ce8b56664c8389778f52c0e35827"
   },
   {
    "question_idx": "hm_driving__000416",
@@ -13847,7 +13901,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__03086bac77d643b4a7c3bf34f861ea94"
   },
   {
    "question_idx": "hm_driving__000217",
@@ -14086,7 +14141,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__7704b854bcf14e30b095ff737bdbf76b"
   },
   {
    "question_idx": "hm_driving__000376",
@@ -14318,7 +14374,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__942b78450f114c2ea4a0e9e0d2e851fe"
   },
   {
    "question_idx": "hm_driving__000348",
@@ -14558,7 +14615,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__664d309da5204d87894beffeff19992f"
   },
   {
    "question_idx": "hm_driving__000381",
@@ -14815,7 +14873,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__25e10c1805e74ad9aef8ae14de11880e"
   },
   {
    "question_idx": "hm_driving__000314",
@@ -15038,7 +15097,8 @@
     ]
    },
    "ultimate_answer": "d",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "driving__9d58f8b3ca0f471d86e41d4ec627983e"
   },
   {
    "question_idx": "hm_industry__000201",
@@ -15244,7 +15304,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__6d0a716a130a4bec86568ee89fddc259"
   },
   {
    "question_idx": "hm_industry__000103",
@@ -15569,7 +15630,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__384171e559764002ad20759852cc3ebf"
   },
   {
    "question_idx": "hm_industry__000069",
@@ -15860,7 +15922,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__532cb66876704180a9ae5571d483b6c4"
   },
   {
    "question_idx": "hm_industry__000174",
@@ -16114,7 +16177,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__a04655b9852f482f9602a7185d3802e5"
   },
   {
    "question_idx": "hm_industry__000236",
@@ -16593,7 +16657,8 @@
     ]
    },
    "ultimate_answer": "b",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__9f87a63f163a4089b481f600dade9c1f"
   },
   {
    "question_idx": "hm_industry__000012",
@@ -16833,7 +16898,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__0237d5a13faa4cc1865929f9537acf71"
   },
   {
    "question_idx": "hm_industry__000347",
@@ -17039,7 +17105,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__e7ad240fcf1c474bbe05e8b18a521492"
   },
   {
    "question_idx": "hm_industry__000195",
@@ -17330,7 +17397,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__5a45aa5777ae45279a974b4218d206f4"
   },
   {
    "question_idx": "hm_industry__000142",
@@ -17559,7 +17627,8 @@
     ]
    },
    "ultimate_answer": "a",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__a31acb3be349424793c22a4f70b68a2d"
   },
   {
    "question_idx": "hm_industry__000408",
@@ -17850,7 +17919,8 @@
     ]
    },
    "ultimate_answer": "c",
-   "is_correct": true
+   "is_correct": true,
+   "video_id": "industrial__c5ef8f9fa4434adeb6edc9dda2135a88"
   }
  ]
 }
