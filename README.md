@@ -258,7 +258,7 @@ One-time setup:
 
 ### Custom domain
 
-The site is published at **.** (configured in **Settings → Pages → Custom
+The site is published at (configured in **Settings → Pages → Custom
 domain**). Two things make that work and must stay in place:
 
 - `vite.config.ts` has `base: "/"` — on a custom domain the site is served from the domain root, so
